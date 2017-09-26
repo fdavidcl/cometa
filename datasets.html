@@ -1,2 +1,59 @@
 ---
+title: Browse datasets
+layout: page
 ---
+
+<div class="level">
+  <div class="level-left">
+    <div class="level-item">
+      <p class="subtitle">
+        <strong>
+          {% assign mldcounter = 0 %}
+          {% for mld in site.data.datasets %}
+          {% assign mldcounter = mldcounter | plus: 1 %}
+          {% endfor %}
+          {{ mldcounter }}
+        </strong> dataset{% if mldcounter != 1 %}s{% endif %}
+      </p>
+    </div>
+    <div class="level-item">
+      <div class="field has-addons">
+        <p class="control">
+          <input class="input" type="text" placeholder="Find a dataset">
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="level-right">
+    <div class="level-item">
+      <a class="button" href="/submit/">
+        <span class="icon"><i class="fa fa-plus"></i></span>
+        <span>Submit a new dataset</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Attributes</th>
+      <th>Labels</th>
+      <th>Instances</th>
+      <th>Cardinality</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for mld_h in site.data.datasets %}
+    {% assign mld = mld_h[1] %}
+    <tr>
+      <td>{{ mld["name"] }}</td>
+      <td>{{ mld["num.attributes"] }}</td>
+      <td>{{ mld["num.labels"] }}</td>
+      <td>{{ mld["num.instances"] }}</td>
+      <td>{{ mld["cardinality"] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

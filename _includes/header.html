@@ -17,15 +17,18 @@
       </div>
 
       <div class="navbar-end">
-        <a class="navbar-item" href="{{ site.baseurl }}/">
+        <a class="navbar-item {% if page.url == '/' %}is-active{% endif %}" href="{{ site.baseurl }}/">
           About
         </a>
-        <a class="navbar-item" href="{{ site.baseurl }}/datasets/">
+        <a class="navbar-item {% if page.url == '/datasets/' %}is-active{% endif %}" href="{{ site.baseurl }}/datasets/">
           Browse datasets
         </a>
-        <a class="navbar-item" href="{{ site.baseurl }}/">
-          Source code
-        </a>
+        <span class="navbar-item">
+          <a class="button" href="{{ site.baseurl }}/">
+            <span class="icon"><i class="fa fa-github"></i></span>
+            <span>Source code</span>
+          </a>
+        </span>
       </div>
     </div>
   </div>
