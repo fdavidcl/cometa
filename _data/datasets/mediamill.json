@@ -1,0 +1,903 @@
+{
+  "num.attributes": 221,
+  "num.instances": 43907,
+  "num.inputs": 120,
+  "num.labels": 101,
+  "num.labelsets": 6555,
+  "num.single.labelsets": 4104,
+  "max.frequency": 2363,
+  "cardinality": 4.3756,
+  "density": 0.0433,
+  "meanIR": 256.4047,
+  "scumble": 0.3547,
+  "scumble.cv": 0.7426,
+  "tcs": 18.1906,
+  "name": "mediamill",
+  "internal.name": "mediamill-train-exp1",
+  "attributes": [
+    {
+      "name": "Att1",
+      "type": "numeric"
+    },
+    {
+      "name": "Att2",
+      "type": "numeric"
+    },
+    {
+      "name": "Att3",
+      "type": "numeric"
+    },
+    {
+      "name": "Att4",
+      "type": "numeric"
+    },
+    {
+      "name": "Att5",
+      "type": "numeric"
+    },
+    {
+      "name": "Att6",
+      "type": "numeric"
+    },
+    {
+      "name": "Att7",
+      "type": "numeric"
+    },
+    {
+      "name": "Att8",
+      "type": "numeric"
+    },
+    {
+      "name": "Att9",
+      "type": "numeric"
+    },
+    {
+      "name": "Att10",
+      "type": "numeric"
+    },
+    {
+      "name": "Att11",
+      "type": "numeric"
+    },
+    {
+      "name": "Att12",
+      "type": "numeric"
+    },
+    {
+      "name": "Att13",
+      "type": "numeric"
+    },
+    {
+      "name": "Att14",
+      "type": "numeric"
+    },
+    {
+      "name": "Att15",
+      "type": "numeric"
+    },
+    {
+      "name": "Att16",
+      "type": "numeric"
+    },
+    {
+      "name": "Att17",
+      "type": "numeric"
+    },
+    {
+      "name": "Att18",
+      "type": "numeric"
+    },
+    {
+      "name": "Att19",
+      "type": "numeric"
+    },
+    {
+      "name": "Att20",
+      "type": "numeric"
+    },
+    {
+      "name": "Att21",
+      "type": "numeric"
+    },
+    {
+      "name": "Att22",
+      "type": "numeric"
+    },
+    {
+      "name": "Att23",
+      "type": "numeric"
+    },
+    {
+      "name": "Att24",
+      "type": "numeric"
+    },
+    {
+      "name": "Att25",
+      "type": "numeric"
+    },
+    {
+      "name": "Att26",
+      "type": "numeric"
+    },
+    {
+      "name": "Att27",
+      "type": "numeric"
+    },
+    {
+      "name": "Att28",
+      "type": "numeric"
+    },
+    {
+      "name": "Att29",
+      "type": "numeric"
+    },
+    {
+      "name": "Att30",
+      "type": "numeric"
+    },
+    {
+      "name": "Att31",
+      "type": "numeric"
+    },
+    {
+      "name": "Att32",
+      "type": "numeric"
+    },
+    {
+      "name": "Att33",
+      "type": "numeric"
+    },
+    {
+      "name": "Att34",
+      "type": "numeric"
+    },
+    {
+      "name": "Att35",
+      "type": "numeric"
+    },
+    {
+      "name": "Att36",
+      "type": "numeric"
+    },
+    {
+      "name": "Att37",
+      "type": "numeric"
+    },
+    {
+      "name": "Att38",
+      "type": "numeric"
+    },
+    {
+      "name": "Att39",
+      "type": "numeric"
+    },
+    {
+      "name": "Att40",
+      "type": "numeric"
+    },
+    {
+      "name": "Att41",
+      "type": "numeric"
+    },
+    {
+      "name": "Att42",
+      "type": "numeric"
+    },
+    {
+      "name": "Att43",
+      "type": "numeric"
+    },
+    {
+      "name": "Att44",
+      "type": "numeric"
+    },
+    {
+      "name": "Att45",
+      "type": "numeric"
+    },
+    {
+      "name": "Att46",
+      "type": "numeric"
+    },
+    {
+      "name": "Att47",
+      "type": "numeric"
+    },
+    {
+      "name": "Att48",
+      "type": "numeric"
+    },
+    {
+      "name": "Att49",
+      "type": "numeric"
+    },
+    {
+      "name": "Att50",
+      "type": "numeric"
+    },
+    {
+      "name": "Att51",
+      "type": "numeric"
+    },
+    {
+      "name": "Att52",
+      "type": "numeric"
+    },
+    {
+      "name": "Att53",
+      "type": "numeric"
+    },
+    {
+      "name": "Att54",
+      "type": "numeric"
+    },
+    {
+      "name": "Att55",
+      "type": "numeric"
+    },
+    {
+      "name": "Att56",
+      "type": "numeric"
+    },
+    {
+      "name": "Att57",
+      "type": "numeric"
+    },
+    {
+      "name": "Att58",
+      "type": "numeric"
+    },
+    {
+      "name": "Att59",
+      "type": "numeric"
+    },
+    {
+      "name": "Att60",
+      "type": "numeric"
+    },
+    {
+      "name": "Att61",
+      "type": "numeric"
+    },
+    {
+      "name": "Att62",
+      "type": "numeric"
+    },
+    {
+      "name": "Att63",
+      "type": "numeric"
+    },
+    {
+      "name": "Att64",
+      "type": "numeric"
+    },
+    {
+      "name": "Att65",
+      "type": "numeric"
+    },
+    {
+      "name": "Att66",
+      "type": "numeric"
+    },
+    {
+      "name": "Att67",
+      "type": "numeric"
+    },
+    {
+      "name": "Att68",
+      "type": "numeric"
+    },
+    {
+      "name": "Att69",
+      "type": "numeric"
+    },
+    {
+      "name": "Att70",
+      "type": "numeric"
+    },
+    {
+      "name": "Att71",
+      "type": "numeric"
+    },
+    {
+      "name": "Att72",
+      "type": "numeric"
+    },
+    {
+      "name": "Att73",
+      "type": "numeric"
+    },
+    {
+      "name": "Att74",
+      "type": "numeric"
+    },
+    {
+      "name": "Att75",
+      "type": "numeric"
+    },
+    {
+      "name": "Att76",
+      "type": "numeric"
+    },
+    {
+      "name": "Att77",
+      "type": "numeric"
+    },
+    {
+      "name": "Att78",
+      "type": "numeric"
+    },
+    {
+      "name": "Att79",
+      "type": "numeric"
+    },
+    {
+      "name": "Att80",
+      "type": "numeric"
+    },
+    {
+      "name": "Att81",
+      "type": "numeric"
+    },
+    {
+      "name": "Att82",
+      "type": "numeric"
+    },
+    {
+      "name": "Att83",
+      "type": "numeric"
+    },
+    {
+      "name": "Att84",
+      "type": "numeric"
+    },
+    {
+      "name": "Att85",
+      "type": "numeric"
+    },
+    {
+      "name": "Att86",
+      "type": "numeric"
+    },
+    {
+      "name": "Att87",
+      "type": "numeric"
+    },
+    {
+      "name": "Att88",
+      "type": "numeric"
+    },
+    {
+      "name": "Att89",
+      "type": "numeric"
+    },
+    {
+      "name": "Att90",
+      "type": "numeric"
+    },
+    {
+      "name": "Att91",
+      "type": "numeric"
+    },
+    {
+      "name": "Att92",
+      "type": "numeric"
+    },
+    {
+      "name": "Att93",
+      "type": "numeric"
+    },
+    {
+      "name": "Att94",
+      "type": "numeric"
+    },
+    {
+      "name": "Att95",
+      "type": "numeric"
+    },
+    {
+      "name": "Att96",
+      "type": "numeric"
+    },
+    {
+      "name": "Att97",
+      "type": "numeric"
+    },
+    {
+      "name": "Att98",
+      "type": "numeric"
+    },
+    {
+      "name": "Att99",
+      "type": "numeric"
+    },
+    {
+      "name": "Att100",
+      "type": "numeric"
+    },
+    {
+      "name": "Att101",
+      "type": "numeric"
+    },
+    {
+      "name": "Att102",
+      "type": "numeric"
+    },
+    {
+      "name": "Att103",
+      "type": "numeric"
+    },
+    {
+      "name": "Att104",
+      "type": "numeric"
+    },
+    {
+      "name": "Att105",
+      "type": "numeric"
+    },
+    {
+      "name": "Att106",
+      "type": "numeric"
+    },
+    {
+      "name": "Att107",
+      "type": "numeric"
+    },
+    {
+      "name": "Att108",
+      "type": "numeric"
+    },
+    {
+      "name": "Att109",
+      "type": "numeric"
+    },
+    {
+      "name": "Att110",
+      "type": "numeric"
+    },
+    {
+      "name": "Att111",
+      "type": "numeric"
+    },
+    {
+      "name": "Att112",
+      "type": "numeric"
+    },
+    {
+      "name": "Att113",
+      "type": "numeric"
+    },
+    {
+      "name": "Att114",
+      "type": "numeric"
+    },
+    {
+      "name": "Att115",
+      "type": "numeric"
+    },
+    {
+      "name": "Att116",
+      "type": "numeric"
+    },
+    {
+      "name": "Att117",
+      "type": "numeric"
+    },
+    {
+      "name": "Att118",
+      "type": "numeric"
+    },
+    {
+      "name": "Att119",
+      "type": "numeric"
+    },
+    {
+      "name": "Att120",
+      "type": "numeric"
+    },
+    {
+      "name": "Class1",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class2",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class3",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class4",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class5",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class6",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class7",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class8",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class9",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class10",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class11",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class12",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class13",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class14",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class15",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class16",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class17",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class18",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class19",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class20",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class21",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class22",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class23",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class24",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class25",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class26",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class27",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class28",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class29",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class30",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class31",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class32",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class33",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class34",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class35",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class36",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class37",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class38",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class39",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class40",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class41",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class42",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class43",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class44",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class45",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class46",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class47",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class48",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class49",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class50",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class51",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class52",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class53",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class54",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class55",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class56",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class57",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class58",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class59",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class60",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class61",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class62",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class63",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class64",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class65",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class66",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class67",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class68",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class69",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class70",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class71",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class72",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class73",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class74",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class75",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class76",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class77",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class78",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class79",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class80",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class81",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class82",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class83",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class84",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class85",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class86",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class87",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class88",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class89",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class90",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class91",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class92",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class93",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class94",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class95",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class96",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class97",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class98",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class99",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class100",
+      "type": "{0,1}"
+    },
+    {
+      "name": "Class101",
+      "type": "{0,1}"
+    }
+  ]
+}
