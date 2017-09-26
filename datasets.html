@@ -48,7 +48,7 @@ layout: page
     {% for mld_h in site.data.datasets %}
     {% assign mld = mld_h[1] %}
     <tr>
-      <td>{{ mld["name"] }}</td>
+      <td><a href="{{ site.baseurl }}/{{ site.data_gen.dir }}/{{ mld_h[0] }}">{{ mld["name"] }}</a></td>
       <td>{{ mld["num.attributes"] }}</td>
       <td>{{ mld["num.labels"] }}</td>
       <td>{{ mld["num.instances"] }}</td>
@@ -57,3 +57,16 @@ layout: page
     {% endfor %}
   </tbody>
 </table>
+
+<script>
+  var variables = ["name", "num.attributes", "num.labels", "num.instances", "cardinality"];
+  
+  var datasets = [
+  {% for mld_h in site.data.datasets %}
+  {% assign mld = mld_h[1] %}
+  {{ mld | replace: "=>", ":" }},
+  {% endfor %}
+  ];
+
+  // TODO create reorderable table
+</script>

@@ -2,6 +2,10 @@ title: Completas
 
 permalink: pretty
 
+data_gen:
+  path: "datasets"
+  dir: "datasets"
+
 defaults:
   -
     scope:

@@ -1,0 +1,80 @@
+---
+layout: page
+---
+
+<div class="columns">
+  <div class="column">
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Metrics
+        </p>
+      </header>
+      <div class="card-content">
+        <table class="table is-fullwidth">
+          <tr>
+            <th>Instances</th>
+            <td>{{ page.data["num.instances"] }}</td>
+          </tr>
+          <tr>
+            <th>Attributes</th>
+            <td>{{ page.data["num.attributes"] }}</td>
+          </tr>
+          <tr>
+            <th>Labels</th>
+            <td>{{ page.data["num.labels"] }}</td>
+          </tr>
+          <tr>
+            <th>Cardinality</th>
+            <td>{{ page.data["cardinality"] }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Concurrence plot
+        </p>
+      </header>
+      <div class="card-image">
+        <figure class="image is-4by3">
+        </figure>
+      </div>
+    </div>
+
+    <div class="level"></div>
+    
+    <nav class="panel attribute-panel">
+      <p class="panel-heading">Attributes</p>
+      <div class="panel-block">
+        <p class="control has-icons-left">
+          <input class="input is-small" type="text" placeholder="search">
+          <span class="icon is-small is-left">
+            <i class="fa fa-search"></i>
+          </span>
+        </p>
+      </div>
+
+      <p class="panel-tabs">
+        <a class="is-active">all</a>
+        <a>inputs</a>
+        <a>labels</a>
+      </p>
+
+      <div class="panel-content">
+        {% for attr in page.data["attributes"] %}  
+        <span class="panel-block">
+          {{ attr.name }} ({{ attr.type }})
+        </span>
+        {% endfor %}
+      </div>
+    </nav>
+    
+  </div>
+  <div class="column">
+  </div>
+</div>
