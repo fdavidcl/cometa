@@ -49,6 +49,8 @@
 
     <section class="section">
   <div class="container">
+    
+    
     <h1 class="title">mediamill</h1>
 
     <div class="columns">
@@ -78,6 +80,20 @@
             <td>4.3756</td>
           </tr>
         </table>
+      </div>
+    </div>
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Citation
+        </p>
+      </header>
+      <div class="card-content">
+        <pre><code>@article{,
+
+...
+
+}</code></pre>
       </div>
     </div>
   </div>
@@ -1005,6 +1021,86 @@
     
   </div>
   <div class="column">
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Download
+        </p>
+      </header>
+      <div class="card-content">
+        <form>
+          
+          <div class="field">
+            <label class="label" for="strategy">Strategy</label>
+            <div class="select is-fullwidth">
+              <select id="strategy">
+                
+                <option value="rand">Random</option>
+                Random
+                
+                <option value="stra">Stratified</option>
+                Stratified
+                
+                <option value="iter">Iterative stratified</option>
+                Iterative stratified
+                
+              </select>
+            </div>
+          </div>
+          
+          <div class="field">
+            <label class="label" for="validation">Validation</label>
+            <div class="select is-fullwidth">
+              <select id="validation">
+                
+                <option value="holdout">Hold out</option>
+                Hold out
+                
+                <option value="1x5">1x5-fold cross validation</option>
+                1x5-fold cross validation
+                
+                <option value="2x5">2x5-fold cross validation</option>
+                2x5-fold cross validation
+                
+                <option value="1x10">10-fold cross validation</option>
+                10-fold cross validation
+                
+              </select>
+            </div>
+          </div>
+          
+          <div class="field">
+            <label class="label" for="format">Format</label>
+            <div class="select is-fullwidth">
+              <select id="format">
+                
+                <option value="mulan">MULAN</option>
+                MULAN
+                
+                <option value="meka">MEKA</option>
+                MEKA
+                
+                <option value="libsvm">LibSVM</option>
+                LibSVM
+                
+                <option value="keel">KEEL</option>
+                KEEL
+                
+                <option value="mldr">mldr</option>
+                mldr
+                
+              </select>
+            </div>
+          </div>
+          
+          <div class="field">
+            <a class="button is-info is-fullwidth">
+              <span class="icon"><i class="fa fa-download"></i></span>
+              <span>Download</span>
+            </a>
+          </div>
+        </form>
+      </div>
   </div>
 </div>
 
