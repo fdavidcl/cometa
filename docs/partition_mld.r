@@ -50,16 +50,26 @@ VALIDATION = list (
   }
 )
 
-partition <- function(mld) {
+sparseness <- function(mld) {
+  sum(mld$dataset == 0) / prod(dim(mld$dataset))
+}
+
+should_sparse <- function(mld) {
+  sparseness(mld) > 0.5
+}
+
+partition <- function(mld, name) {
+  sparse = should_sparse(mld)
+  
   for (s in 1:length(STRATEGIES)) {
     for (v in 1:length(VALIDATION)) {
       fold_list <- VALIDATION[[v]](mld, STRATEGIES[[s]])
       
       for (g in names(fold_list)) {
-        basename <- paste(mld$name, names(STRATEGIES)[s], names(VALIDATION)[v], g, sep = "-")
+        basename <- paste(name, names(STRATEGIES)[s], names(VALIDATION)[v], g, sep = "-")
         
         for (f in FORMATS) {
-          mldr.datasets::write.mldr(fold_list[[g]], format = f, basename = basename)
+          mldr.datasets::write.mldr(fold_list[[g]], format = f, basename = basename, sparse = sparse)
         }
         
         # RDS format
@@ -77,14 +87,28 @@ main <- function() {
     dataset <- get(mldname)
     
     if (class(dataset) != "mldr") {
-      mldname <- check_n_load.mldr(mldname)
+      # mldname <- check_n_load.mldr(mldname)
+      mldname <- tryCatch(
+        load(paste0("../mldr.datasets/additional-data/", mldname, ".rda")),
+        error = function(e) {
+          
+          mldname <- tryCatch(
+            load(paste0("../mldr.datasets/data/", mldname, ".rda")),
+            error = { cat("Couldn't find dataset :(") }
+          ) 
+          
+          if (!is.null(mldname))
+            dataset <- get(mldname)
+        }
+      ) 
       
       if (!is.null(mldname))
         dataset <- get(mldname)
+      
     }
     
     if (class(dataset) == "mldr") {
-      partition(dataset)
+      partition(dataset, mldname)
     } else {
       cat("Please specify a valid mld name\n")
     }

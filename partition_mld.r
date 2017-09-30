@@ -50,7 +50,17 @@ VALIDATION = list (
   }
 )
 
+sparseness <- function(mld) {
+  sum(mld$dataset == 0) / prod(dim(mld$dataset))
+}
+
+should_sparse <- function(mld) {
+  sparseness(mld) > 0.5
+}
+
 partition <- function(mld, name) {
+  sparse = should_sparse(mld)
+  
   for (s in 1:length(STRATEGIES)) {
     for (v in 1:length(VALIDATION)) {
       fold_list <- VALIDATION[[v]](mld, STRATEGIES[[s]])
@@ -59,7 +69,7 @@ partition <- function(mld, name) {
         basename <- paste(name, names(STRATEGIES)[s], names(VALIDATION)[v], g, sep = "-")
         
         for (f in FORMATS) {
-          mldr.datasets::write.mldr(fold_list[[g]], format = f, basename = basename)
+          mldr.datasets::write.mldr(fold_list[[g]], format = f, basename = basename, sparse = sparse)
         }
         
         # RDS format

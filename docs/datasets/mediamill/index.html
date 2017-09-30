@@ -91,9 +91,9 @@
       <div class="card-content">
         <pre><code>@article{,
 
-...
+            ...
 
-}</code></pre>
+            }</code></pre>
       </div>
     </div>
   </div>
@@ -1035,6 +1035,9 @@
             <div class="select is-fullwidth">
               <select id="strategy">
                 
+                <option value="full">Unpartitioned</option>
+                Unpartitioned
+                
                 <option value="rand">Random</option>
                 Random
                 
@@ -1053,7 +1056,10 @@
             <div class="select is-fullwidth">
               <select id="validation">
                 
-                <option value="holdout">Hold out</option>
+                <option value="none">Unpartitioned</option>
+                Unpartitioned
+                
+                <option value="hout">Hold out</option>
                 Hold out
                 
                 <option value="1x5">1x5-fold cross validation</option>
@@ -1101,6 +1107,7 @@
           </div>
         </form>
       </div>
+    </div>
   </div>
 </div>
 
