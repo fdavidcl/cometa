@@ -5,7 +5,8 @@ require(mldr.datasets)
 
 STRATEGIES <-
   list(rand = mldr.datasets::random.kfolds,
-       stra = mldr.datasets::stratified.kfolds)
+       stra = mldr.datasets::stratified.kfolds,
+       iter = mldr.datasets::iterative.stratification.kfolds)
 FORMATS <-
   list(
     arff = c("MULAN", "MEKA"),
