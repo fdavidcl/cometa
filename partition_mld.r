@@ -20,16 +20,16 @@ ALT_SEED <- 31638452
 # (mld : "mldr", f : (mld, k, seed) -> mldr.folds) -> list() : named list with a mldr for each file to be written
 VALIDATION = list (
   hout = function(mld, f) {
-    folds <- f(mld, k = 10, seed = SEED)
+    folds <- f(mld, k = 10, seed = SEED, get.indices = T)
     list(
-      tra = Reduce(`+`, lapply(folds[1:6], function(x) x$train)),
-      tst = Reduce(`+`, lapply(folds[7:10], function(x) x$train))
+      tra = Reduce(c, lapply(folds[1:6], function(x) x$train)),
+      tst = Reduce(c, lapply(folds[7:10], function(x) x$train))
     )
   },
   
   "2x5" = function(mld, f) {
-    folds <- c(f(mld, k = 5, seed = SEED),
-               f(mld, k = 5, seed = ALT_SEED))
+    folds <- c(f(mld, k = 5, seed = SEED, get.indices = T),
+               f(mld, k = 5, seed = ALT_SEED, get.indices = T))
     
     # Name each fold and flatten the list of lists
     Reduce(c, lapply(1:length(folds), function(i) {
@@ -40,7 +40,7 @@ VALIDATION = list (
   },
   
   "1x10" = function(mld, f) {
-    folds <- f(mld, k = 10, seed = SEED)
+    folds <- f(mld, k = 10, seed = SEED, get.indices = T)
     
     # Name each fold and flatten the list of lists
     Reduce(c, lapply(1:length(folds), function(i) {
@@ -69,8 +69,10 @@ partition <- function(mld, name) {
       for (g in names(fold_list)) {
         basename <- paste(name, names(STRATEGIES)[s], names(VALIDATION)[v], g, sep = "-")
         
+        fold_object <- mldr::mldr_from_dataframe(mld$dataset[fold_list[[g]],], labelIndices = mld$labels$index, attributes = mld$attributes, name = mld$name)
+        
         for (f in FORMATS) {
-          mldr.datasets::write.mldr(fold_list[[g]], format = f, basename = basename, sparse = sparse)
+          mldr.datasets::write.mldr(fold_object, format = f, basename = basename, sparse = sparse)
         }
         
         # RDS format
