@@ -4,6 +4,17 @@ layout: default
 
 <section class="section">
   <div class="container">
+    {% if page.breadcrumbs %}
+    <nav class="breadcrumb">
+      <ul>
+        {% for p in page.breadcrumbs %}
+        <li><a href="{{ site.baseurl }}/{{ p[1] }}">{{ p[0] }}</a>
+        {% endfor %}
+        <li class="is-active"><a href="{{ site.baseurl }}/{{ page.url }}"></a>
+      </ul>
+    </nav>
+    {% endif %}
+    
     <h1 class="title">{{ page.title }}</h1>
 
     {{ content }}

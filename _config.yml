@@ -7,6 +7,39 @@ data_gen:
   path: "datasets"
   dir: "datasets"
 
+partitioning:
+  strategy:
+    - id: full
+      name: Unpartitioned
+    - id: rand
+      name: Random
+    - id: stra
+      name: Stratified
+    - id: iter
+      name: Iterative stratified
+  validation:
+    - id: none
+      name: Unpartitioned
+    - id: hout
+      name: Hold out
+    - id: 1x5
+      name: 1x5-fold cross validation
+    - id: 2x5
+      name: 2x5-fold cross validation
+    - id: 1x10
+      name: 10-fold cross validation
+  format:
+    - id: mulan
+      name: MULAN
+    - id: meka
+      name: MEKA
+    - id: libsvm
+      name: LibSVM
+    - id: keel
+      name: KEEL
+    - id: mldr
+      name: mldr
+
 defaults:
   -
     scope:

@@ -31,6 +31,20 @@ layout: page
         </table>
       </div>
     </div>
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Citation
+        </p>
+      </header>
+      <div class="card-content">
+        <pre><code>@article{,
+
+            ...
+
+            }</code></pre>
+      </div>
+    </div>
   </div>
 
   <div class="column">
@@ -76,5 +90,35 @@ layout: page
     
   </div>
   <div class="column">
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Download
+        </p>
+      </header>
+      <div class="card-content">
+        <form>
+          {% for aspect in site.partitioning %}
+          <div class="field">
+            <label class="label" for="{{ aspect[0] }}">{{ aspect[0] | capitalize }}</label>
+            <div class="select is-fullwidth">
+              <select id="{{ aspect[0] }}">
+                {% for option in aspect[1] %}
+                <option value="{{ option.id }}">{{ option.name }}</option>
+                {{ option.name }}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          {% endfor %}
+          <div class="field">
+            <a class="button is-info is-fullwidth">
+              <span class="icon"><i class="fa fa-download"></i></span>
+              <span>Download</span>
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>

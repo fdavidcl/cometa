@@ -53,10 +53,10 @@ main <- function(mldname = commandArgs(trailingOnly = T)) {
 
 .w <- function(x) strsplit(x, " ")[[1]]
 
-#datasets <- read.csv("https://gitlab.com/fdavidcl/mldr.datasets/raw/master/inst/extdata/mldrs.csv", header = T, stringsAsFactors = F)$Name
+datasets <- read.csv("https://gitlab.com/fdavidcl/mldr.datasets/raw/master/inst/extdata/mldrs.csv", header = T, stringsAsFactors = F)$Name
 #datasets <- setdiff(datasets, .w("eurlexdc_test eurlexdc_tra eurlexev_test eurlexev_tra eurlexsm_test eurlexsm_tra imdb nuswide_BoW nuswide_VLAD tmc2007 tmc2007_500"))
 #datasets <- .w("yahoo_arts yahoo_education yahoo_recreation yahoo_social yahoo_business yahoo_entertainment yahoo_reference yahoo_society yahoo_computers yahoo_health yahoo_science yeast")
-datasets <- .w("tmc2007")
+#datasets <- .w("tmc2007")
 
 for (x in datasets) {
   cat("Incoming:", x, "\n")
