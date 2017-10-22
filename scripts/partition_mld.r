@@ -67,7 +67,7 @@ partition <- function(mld, name) {
       fold_list <- VALIDATION[[v]](mld, STRATEGIES[[s]])
 
       for (g in names(fold_list)) {
-        basename <- paste(name, names(STRATEGIES)[s], names(VALIDATION)[v], g, sep = "-")
+        basename <- paste0("public/partitions/", paste(name, names(STRATEGIES)[s], names(VALIDATION)[v], g, sep = "-"))
 
         fold_object <- mldr::mldr_from_dataframe(mld$dataset[fold_list[[g]],], labelIndices = mld$labels$index, attributes = mld$attributes, name = mld$name)
 
@@ -84,39 +84,18 @@ partition <- function(mld, name) {
 }
 
 main <- function() {
-  mldname <- commandArgs(trailingOnly = T)
+  path <- commandArgs(trailingOnly = T)
 
-  if (length(mldname) == 1) {
-    dataset <- get(mldname)
-
-    if (class(dataset) != "mldr") {
-      # mldname <- check_n_load.mldr(mldname)
-      mldname <- tryCatch(
-        load(paste0("../mldr.datasets/additional-data/", mldname, ".rda")),
-        error = function(e) {
-
-          mldname <- tryCatch(
-            load(paste0("../mldr.datasets/data/", mldname, ".rda")),
-            error = { cat("Couldn't find dataset :(") }
-          )
-
-          if (!is.null(mldname))
-            dataset <- get(mldname)
-        }
-      )
-
-      if (!is.null(mldname))
-        dataset <- get(mldname)
-
-    }
+  if (length(path) == 1) {
+    dataset <- readRDS(path)
 
     if (class(dataset) == "mldr") {
-      partition(dataset, mldname)
+      partition(dataset, sub(".rds", "", basename(path), fixed = T))
     } else {
-      cat("Please specify a valid mld name\n")
+      cat("Please specify a valid mld file\n")
     }
   } else {
-    cat("Usage: partition_mld.r mld_name\n")
+    cat("Usage: partition_mld.r path_to_rds\n")
   }
 }
 

@@ -4,19 +4,11 @@ library(mldr)
 library(mldr.datasets)
 library(jsonlite)
 
-mldname <- commandArgs(trailingOnly = T)
+path <- commandArgs(trailingOnly = T)
+mldname <- sub(".rds", "", basename(path), fixed = T)
+dataset <- readRDS(path)
 
-if (length(mldname) == 1) {
-  dataset <- get(mldname)
-  
-  if (class(dataset) != "mldr") {
-    mldname <- check_n_load.mldr(mldname)
-    
-    if (!is.null(mldname))
-      dataset <- get(mldname)
-  }
-  
-  if (class(dataset) == "mldr") {
+if (class(dataset) == "mldr") {
     sum <- dataset$measures
     sum$name <- mldname
     sum$internal.name <- dataset$name
@@ -25,9 +17,6 @@ if (length(mldname) == 1) {
     sink(paste0("site/_data/datasets/", mldname, ".json"))
     cat(toJSON(sum, pretty=T, auto_unbox = T))
     sink()
-  } else {
-    cat("Please specify a valid mld name\n")
-  }
 } else {
-  cat("Usage: dataset_to_json.r mld_name\n")
+    cat("Please specify a valid mld name\n")
 }
