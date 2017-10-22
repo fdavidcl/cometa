@@ -9,18 +9,7 @@ class CometaMenu
     self.cli = HighLine.new
     self.datasets = Dir["public/full/*.rds"]
     
-    welcome
     start_menu
-  end
-
-  def welcome
-    cli.say <<EOF
-____________________________________________________________
-      
-#{"Welcome to cometa".center 60}
-____________________________________________________________
-
-EOF
   end
 
   def first
@@ -28,6 +17,9 @@ EOF
       cli.say "We didn't find any datasets in the 'public/full' directory."
       exit(1) unless cli.agree("Continue with no datasets? > ")
     end
+
+    cli.say "Now we're going to install any missing dependencies"
+    system "scripts/dependencies.r mldr mldr.datasets jsonlite"
   end
 
   def partition
@@ -54,26 +46,49 @@ EOF
   end
 
   def start_menu
-    cli.choose do |menu|
-      menu.prompt = "Please select an option > "
-      menu.choice("Interactive first-run") do
-        first
-        partition
+    begin
+      cli.choose do |menu|
+        menu.header = cli.color("Welcome to Cometa", :blue)
+        menu.prompt = "\nPlease select an option > "
+        
+        menu.choice("Interactive first-run") do
+          first
+          cli.newline
+          partition
+        end
+        
+        menu.choice("Partition datasets") do
+          first
+          cli.newline
+          partition
+          cli.newline
+          start_menu
+        end
+        
+        menu.choice("Create summaries of your data") do
+          first
+          cli.newline
+          summarize
+          cli.newline
+          start_menu
+        end
+        
+        menu.choice("Launch cometa server") do
+          launch
+          cli.newline
+          start_menu
+        end
+
+        menu.choice("Quit") do
+          if cli.agree("Are you sure? > ")
+            exit(0)
+          else
+            start_menu
+          end
+        end
       end
-      
-      menu.choice("Partition datasets") do
-        first
-        partition
-      end
-      
-      menu.choice("Create summaries of your data") do
-        first
-        summarize
-      end
-      
-      menu.choice("Launch cometa server") do
-        launch
-      end
+    rescue EOFError
+      exit(-1)
     end
   end
 end
