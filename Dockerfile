@@ -11,10 +11,10 @@ FROM ruby:2.4.2-onbuild
 # RUN bundle
 
 # Make port 80 available to the world outside this container
-EXPOSE 443
+EXPOSE 8080
 
 # Define environment variable
 # ENV NAME World
 
-# Run app.py when the container launches
-CMD ["bundle", "exec", "jekyll", "serve", "-H", "0.0.0.0", "-P", "443"]
+ENTRYPOINT /usr/src/app/entry_point.sh
+CMD ruby launch.rb

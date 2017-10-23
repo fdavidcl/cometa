@@ -52,22 +52,22 @@ EOF
         menu.header = cli.color("Welcome to Cometa", :blue)
         menu.prompt = "\nPlease select an option > "
         
-        menu.choice("Interactive first-run") do
-          first
-          cli.newline
-          partition
-          cli.newline
+        # menu.choice("Interactive first-run") do
+        #   first
+        #   cli.newline
+        #   partition
+        #   cli.newline
           
-          summarize
-          cli.newline
+        #   summarize
+        #   cli.newline
 
-          jekyll_compile
-          cli.newline
-          launch_app
-          cli.newline
+        #   jekyll_compile
+        #   cli.newline
+        #   launch_app
+        #   cli.newline
 
-          start_menu
-        end
+        #   start_menu
+        # end
         
         menu.choice("Partition datasets") do
           first
@@ -85,7 +85,7 @@ EOF
           start_menu
         end
         
-        menu.choice("Launch cometa server") do
+        menu.choice("Launch Cometa server") do
           jekyll_compile
           cli.newline
           launch_app
@@ -107,13 +107,4 @@ EOF
   end
 end
 
-
-if ENV["DAEMON"]
-  launch_app
-else
-  CometaMenu.new
-end
-
-# TODO write configuration somewhere and allow to run non-interactively
-# read DAEMON=true from environment
-# launch docker run --env DAEMON=true
+CometaMenu.new

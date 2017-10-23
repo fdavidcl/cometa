@@ -4,14 +4,14 @@ require 'rack'
 require 'rack/contrib'
 
 def launch_app
-  app = Proc.new do |env|
+  server = Rack::Builder.new do |env|
     root = "app"
 
     map "/" do
       use Rack::TryStatic, 
-          :urls  => Dir.glob("#{root}/*").map { |f| f.sub(root, '') },
-          :root  => File.expand_path(root),
-          :try => ["index.html", "/index.html"]
+          :urls => Dir.glob("#{root}/*").map { |f| f.sub(root, '') },
+          :root => File.expand_path(root),
+          :try  => ["index.html", "/index.html"]
     end
 
     map "/public/" do
@@ -29,9 +29,12 @@ def launch_app
 
     run not_found
   end
-
-  Rack::Handler::Thin.run app, :Port => 8080
+  
+  Rack::Handler.pick(["thin", "puma"]).run server, Port: 8080
 end
 
 # main
-launch_app if __FILE__ == $0
+if __FILE__ == $0
+  puts "Starting Cometa server..."
+  launch_app
+end
