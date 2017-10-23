@@ -11,6 +11,7 @@ gem "thin"
 
 # For the web site
 gem "jekyll", "3.6.0"
+gem "json"
 
 group :jekyll_plugins do
    # gem "jekyll-feed", "~> 0.6"

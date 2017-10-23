@@ -1,5 +1,9 @@
 #!/usr/bin/env Rscript
 
+# install.packages("devtools", repos = "https://cran.r-project.org")
+
+# devtools::install_github("rstudio/httpuv", args = "--configure-args='CFLAGS=-D__USE_MISC'")
+
 check_install <- function(pkg) {
   not_installed <- !(pkg %in% installed.packages())
   if (any(not_installed))

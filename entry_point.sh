@@ -3,8 +3,7 @@
 set -e
 
 if [ -t 0 ] ; then
-    ruby init.rb
+    ruby init.rb menu
 else
-    ruby launch.rb
+    ruby init.rb daemon
 fi
-# /bin/bash -c "$@"

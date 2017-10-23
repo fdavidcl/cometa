@@ -1,20 +1,32 @@
-# Use an official Ruby runtime as a parent image
-FROM ruby:2.4.2-onbuild
+FROM r-base:3.4.2
+MAINTAINER David Charte <fdavidcl@protonmail.com>
 
-# Set the working directory to /app
-# WORKDIR /app
+ENV BUILD_PACKAGES bash curl ruby-dev build-essential libffi-dev libxml2-dev libssl-dev
+ENV RUBY_PACKAGES ruby ruby-bundler
 
-# Copy the current directory contents into the container at /app
-# ADD . /app
+# Update and install all of the required packages.
+# At the end, remove the package cache
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends $BUILD_PACKAGES $RUBY_PACKAGES && \
+    rm -rf /var/lib/apt/lists/*
 
-# Install any needed packages specified in Gemfile
-# RUN bundle
+RUN mkdir /usr/app
+WORKDIR /usr/app
 
-# Make port 80 available to the world outside this container
-EXPOSE 8080
+# Install Ruby dependencies
+COPY Gemfile /usr/app/
+COPY Gemfile.lock /usr/app/
+RUN bundle install --frozen
 
-# Define environment variable
-# ENV NAME World
+# Install R dependencies
+RUN mkdir /usr/app/scripts
+COPY scripts/dependencies.r /usr/app/scripts
+RUN /usr/app/scripts/dependencies.r mldr mldr.datasets jsonlite && \
+    rm -rf /tmp/*/downloaded_packages
 
-ENTRYPOINT /usr/src/app/entry_point.sh
-CMD ruby launch.rb
+# Copy and run app
+COPY . /usr/app
+
+EXPOSE 80
+
+ENTRYPOINT /usr/app/entry_point.sh
