@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'highline'
+require_relative 'launch.rb'
 
 class CometaMenu
   attr_accessor :cli, :datasets
@@ -41,7 +42,7 @@ EOF
     end
   end
 
-  def launch
+  def jekyll_compile
     system "bundle exec jekyll build -s site -d app"
   end
 
@@ -55,6 +56,17 @@ EOF
           first
           cli.newline
           partition
+          cli.newline
+          
+          summarize
+          cli.newline
+
+          jekyll_compile
+          cli.newline
+          launch_app
+          cli.newline
+
+          start_menu
         end
         
         menu.choice("Partition datasets") do
@@ -74,7 +86,9 @@ EOF
         end
         
         menu.choice("Launch cometa server") do
-          launch
+          jekyll_compile
+          cli.newline
+          launch_app
           cli.newline
           start_menu
         end
@@ -94,8 +108,12 @@ EOF
 end
 
 
-CometaMenu.new
+if ENV["DAEMON"]
+  launch_app
+else
+  CometaMenu.new
+end
 
 # TODO write configuration somewhere and allow to run non-interactively
-# read SERVICE=true from environment
-# launch docker run --env SERVICE=true
+# read DAEMON=true from environment
+# launch docker run --env DAEMON=true

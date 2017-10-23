@@ -4,6 +4,9 @@ source "https://rubygems.org"
 gem "highline"
 
 # Ruby server
+gem "rack"
+gem "rack-contrib"
+gem "rack-rewrite"
 gem "thin"
 
 # For the web site
