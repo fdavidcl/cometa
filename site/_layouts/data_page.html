@@ -38,11 +38,7 @@ layout: page
         </p>
       </header>
       <div class="card-content">
-        <pre><code>@article{,
-
-            ...
-
-            }</code></pre>
+        <pre><code>{{ page.data["bibtex"] }}</code></pre>
       </div>
     </div>
   </div>
@@ -55,7 +51,8 @@ layout: page
         </p>
       </header>
       <div class="card-image">
-        <figure class="image is-4by3">
+        <figure class="image is-1by1">
+          <img src="{{ site.baseurl }}/public/img/{{ page.data['name'] }}.png">
         </figure>
       </div>
     </div>

@@ -22,6 +22,13 @@ if (class(dataset) == "mldr") {
     sink(paste0(my_dir, mldname, ".json"))
     cat(toJSON(sum, pretty=T, auto_unbox = T))
     sink()
+
+    my_plot_dir <- "public/img/"
+    if (!dir.exists(my_plot_dir))
+        dir.create(my_plot_dir)
+    png(paste0(my_plot_dir, mldname, ".png"))
+    mldr:::plot.mldr(dataset)
+    dev.off()
 } else {
     cat("Please specify a valid mld path\n")
 }
