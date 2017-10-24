@@ -12,6 +12,7 @@ module Cometa
       opts[:Port] = options[:Port] || 80
       
       server = Rack::Builder.new do |env|
+
         root = "app"
 
         map "/" do
@@ -22,7 +23,9 @@ module Cometa
         end
 
         map "/public/" do
-          use Rack::Static, :root => "public"
+          use Rack::Static,
+              :urls => Dir.glob("public/*").map { |f| f.sub("public", "") },
+              :root => "public"
         end
 
         not_found = lambda do |env|
