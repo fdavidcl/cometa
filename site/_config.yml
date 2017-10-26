@@ -9,8 +9,6 @@ data_gen:
 
 partitioning:
   strategy:
-    - id: full
-      name: Unpartitioned
     - id: rand
       name: Random
     - id: stra
@@ -18,8 +16,6 @@ partitioning:
     - id: iter
       name: Iterative stratified
   validation:
-    - id: none
-      name: Unpartitioned
     - id: hout
       name: Hold out
     - id: 1x5
@@ -39,6 +35,32 @@ partitioning:
       name: KEEL
     - id: mldr
       name: mldr
+
+dataset_metrics:
+  - id:  "num.instances"
+    name: Instances
+  - id:  "num.attributes"
+    name: Attributes
+  - id:  "num.inputs"
+    name: Inputs
+  - id:  "num.labels"
+    name: Labels
+  - id:  "num.labelsets"
+    name: Labelsets
+  - id:  "num.single.labelsets"
+    name: Single
+  - id:  "max.frequency"
+    name: Max freq
+  - id:  "cardinality"
+    name: Card
+  - id:  "density"
+    name: Dens
+  - id:  "meanIR"
+    name: Mean IR
+  - id:  "scumble"
+    name: Scumble
+  - id:  "tcs"
+    name: TCS
 
 defaults:
   -

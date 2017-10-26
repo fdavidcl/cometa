@@ -1,0 +1,78 @@
+---
+---
+
+@import "variables";
+@import "bulma";
+
+#hide_download {
+    &:not(:checked) + .button + .button {
+        display: none;
+    }
+    &:checked + .button {
+        display: none;
+    }
+}
+#show_download {
+    &:not(:checked) + .download-partitions {
+        display: none;
+    }
+}
+
+.panel-tabs a {
+    cursor: default;
+    label {
+        cursor: pointer;
+    }
+}
+/* Interaction with attribute panel */
+#attr_all {
+    &:not(:checked) ~ .attr-list {
+        display: none;
+    }
+    &:checked ~ .panel-tabs a.attr-all {
+        border-bottom-color: $black;
+    }
+}
+#attr_labels {
+    &:not(:checked) ~ .label-list {
+        display: none;
+    }
+    &:checked ~ .panel-tabs a.attr-labels {
+        border-bottom-color: $black;
+    }
+}
+
+
+.download-partitions table {
+    background: transparent;
+}
+
+table {
+    th.sort {
+        text-decoration: underline;
+        cursor: pointer;
+
+        &:hover {
+            color: $blue;
+        }
+    }
+}
+
+.attribute-panel  {
+    border-bottom: 1px solid $border;
+    .panel-content {
+        max-height: $reasonable-height-of-things;
+        overflow-y: auto;
+
+        .panel-block {
+            max-width: 100%;
+            white-space: nowrap;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+            
+            &:last-child {   
+                border-bottom: 0px solid;
+            }
+        }
+    }
+}

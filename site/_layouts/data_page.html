@@ -1,13 +1,78 @@
 ---
 layout: page
+hide-title: true                        
 ---
 
+<div class="level">
+  <div class="level-left">
+    <p class="title">
+      {{ page.data["name"] }}
+    </p>
+  </div>
+  <div class="level-right">
+    <div class="level-item">
+      <div class="field has-addons">
+        <p class="control">
+          <a class="button is-primary is-medium" href="{{ site.baseurl }}/public/full/{{ page.data['name'] }}.rds">
+            <span class="icon"><i class="fa fa-download"></i></span>
+            <span>Download (.rds)</span>
+          </a>
+        </p>
+        <p class="control">
+          <input type="radio" name="download" id="hide_download" checked hidden>
+          <label class="button is-medium" disabled>
+            <span class="icon"><i class="fa fa-puzzle-piece"></i></span>
+            <span>Download partitions</span>
+          </label>
+          <label class="button is-medium" for="show_download">
+            <span class="icon"><i class="fa fa-puzzle-piece"></i></span>
+            <span>Download partitions</span>
+          </label>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<input type="radio" name="download" id="show_download" hidden>
+<div class="message download-partitions">
+  <div class="message-header">
+    <p>Select your desired partitioning strategy, validation and format</p>
+    <label class="delete" aria-label="delete" for="hide_download"></label>
+  </div>
+  <div class="message-body">
+    <table class="table is-fullwidth">
+      <thead>
+        <th></th>
+        {% for strategy in site.partitioning.strategy %}
+        <th>{{ strategy.name }}</th>
+        {% endfor %}
+      </thead>
+      {% for validation in site.partitioning.validation %}
+      <tr>
+        <th>{{ validation.name }}</th>
+        {% for strategy in site.partitioning.strategy %}
+        <td>
+          {% for format in site.partitioning.format %}
+          <a class="button is-small is-white" href="{{ site.baseurl }}/public/partitions/{{ page.data['name'] }}-{{ strategy.id }}-{{ validation.id }}-{{ format.id }}.zip">{{ format.name }}</a>
+          {% endfor %}
+        </td>
+        {% endfor %}
+
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
 <div class="columns">
-  <div class="column">
+  <div class="column is-half">
     <div class="card">
       <header class="card-header">
         <p class="card-header-title">
-          Metrics
+          Summary
         </p>
       </header>
       <div class="card-content">
@@ -21,12 +86,44 @@ layout: page
             <td>{{ page.data["num.attributes"] }}</td>
           </tr>
           <tr>
+            <th>Inputs</th>
+            <td>{{ page.data["num.inputs"] }}</td>
+          </tr>
+          <tr>
             <th>Labels</th>
             <td>{{ page.data["num.labels"] }}</td>
           </tr>
           <tr>
+            <th>Labelsets</th>
+            <td>{{ page.data["num.labelsets"] }}</td>
+          </tr>
+          <tr>
+            <th>Single labelsets</th>
+            <td>{{ page.data["num.single.labelsets"] }}</td>
+          </tr>
+          <tr>
+            <th>Max frequency</th>
+            <td>{{ page.data["max.frequency"] }}</td>
+          </tr>
+          <tr>
             <th>Cardinality</th>
             <td>{{ page.data["cardinality"] }}</td>
+          </tr>
+          <tr>
+            <th>Density</th>
+            <td>{{ page.data["density"] }}</td>
+          </tr>
+          <tr>
+            <th>Mean IR</th>
+            <td>{{ page.data["meanIR"] }}</td>
+          </tr>
+          <tr>
+            <th>Scumble</th>
+            <td>{{ page.data["scumble"] }}</td>
+          </tr>
+          <tr>
+            <th>TCS</th>
+            <td>{{ page.data["tcs"] }}</td>
           </tr>
         </table>
       </div>
@@ -38,12 +135,14 @@ layout: page
         </p>
       </header>
       <div class="card-content">
-        <pre><code>{{ page.data["bibtex"] }}</code></pre>
+        <div class="content">
+          <pre><code>{{ page.data["bibtex"] }}</code></pre>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="column">
+  <div class="column is-half">
     <div class="card">
       <header class="card-header">
         <p class="card-header-title">
@@ -58,64 +157,57 @@ layout: page
     </div>
 
     <div class="level"></div>
-    
+
     <nav class="panel attribute-panel">
       <p class="panel-heading">Attributes</p>
-      <div class="panel-block">
+      <!--div class="panel-block">
         <p class="control has-icons-left">
           <input class="input is-small" type="text" placeholder="search">
           <span class="icon is-small is-left">
             <i class="fa fa-search"></i>
           </span>
         </p>
-      </div>
+      </div-->
 
+      <input type="radio" name="attr" id="attr_all" hidden checked>
+      <input type="radio" name="attr" id="attr_labels" hidden>
+      
       <p class="panel-tabs">
-        <a class="is-active">all</a>
-        <a>inputs</a>
-        <a>labels</a>
+        <a class="attr-all"><label for="attr_all">all attributes</label></a>
+        <!--a>inputs</a-->
+        <a class="attr-labels"><label for="attr_labels">labels</label></a>
       </p>
 
-      <div class="panel-content">
+      <div class="panel-content attr-list">
         {% for attr in page.data["attributes"] %}  
         <span class="panel-block">
-          {{ attr.name }} ({{ attr.type }})
+          <span class="tag"
+                {% if attr.type contains "{" %}
+                title="{{ attr.type }}">
+            {% if attr.type == "{0,1}" or attr.type == "{0, 1}" %}
+            binary
+            {% else %}
+            categorical
+            {% endif %}
+            {% else %}
+            >{{ attr.type }}
+            {% endif %}
+          </span>
+          &nbsp;
+          {{ attr.name }}
+        </span>
+        {% endfor %}
+      </div>
+
+      <div class="panel-content label-list">
+        {% for label in page.data["labels"] %}
+        {% assign attr = page.data["attributes"][label] %}
+        <span class="panel-block">
+          {{ attr.name }}
         </span>
         {% endfor %}
       </div>
     </nav>
-    
-  </div>
-  <div class="column">
-    <div class="card">
-      <header class="card-header">
-        <p class="card-header-title">
-          Download
-        </p>
-      </header>
-      <div class="card-content">
-        <form>
-          {% for aspect in site.partitioning %}
-          <div class="field">
-            <label class="label" for="{{ aspect[0] }}">{{ aspect[0] | capitalize }}</label>
-            <div class="select is-fullwidth">
-              <select id="{{ aspect[0] }}">
-                {% for option in aspect[1] %}
-                <option value="{{ option.id }}">{{ option.name }}</option>
-                {{ option.name }}
-                {% endfor %}
-              </select>
-            </div>
-          </div>
-          {% endfor %}
-          <div class="field">
-            <a class="button is-info is-fullwidth">
-              <span class="icon"><i class="fa fa-download"></i></span>
-              <span>Download</span>
-            </a>
-          </div>
-        </form>
-      </div>
-    </div>
+
   </div>
 </div>
