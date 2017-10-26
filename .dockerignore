@@ -1,2 +1,7 @@
 app
 .*
+
+public
+site/public
+site/_site
+site/_data/datasets/*.json

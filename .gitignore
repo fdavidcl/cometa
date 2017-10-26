@@ -6,10 +6,7 @@ _site/
 *~
 .R*
 
-public/partitions/*
-!public/partitions/.keep
-public/full/*
-!public/full/.keep
+site/public
 
 site/_data/datasets/*
 !site/_data/datasets/.keep
