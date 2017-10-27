@@ -8,6 +8,14 @@
     padding: $size-small/2 $size-small;
 }
 
+/* Interaction with burger menu */
+#mobile_menu {
+    &:not(:checked) ~ .navbar-menu {
+        display: none;
+    }
+}
+
+/* Interaction with download box */
 #hide_download {
     &:not(:checked) + .button + .button {
         display: none;

@@ -1,15 +1,17 @@
 <header class="navbar is-primary" role="navigation" aria-label="main navigation">
   <div class="container">
+    <input type="checkbox" id="mobile_menu" hidden>
+    
     <div class="navbar-brand">
       <a class="navbar-item" href="{{ site.baseurl }}/">
         {{ site.title }}
       </a>
 
-      <button class="button navbar-burger">
+      <label for="mobile_menu" class="button is-primary navbar-burger">
         <span></span>
         <span></span>
         <span></span>
-      </button>
+      </label>
     </div>
     <div class="navbar-menu is-active">
       <div class="navbar-start">
