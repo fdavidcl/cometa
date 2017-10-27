@@ -56,7 +56,6 @@ module Jekyll
       # (name/index.html) or standard files (name.html). This information
       # is passed to the DataPage constructor, which sets the @dir variable
       # as required by this directive
-      puts "debug"
       index_files = site.config['page_gen-dirs']
       index_files = true if index_files.nil?
 
