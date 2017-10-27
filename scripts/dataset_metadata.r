@@ -15,7 +15,22 @@ if (class(dataset) == "mldr") {
     sum$attributes <- data.frame(name = names(dataset$attributes), type = dataset$attributes, row.names = NULL)
     sum$labels <- dataset$labels$index - 1 # label indices starting from 0
     sum$bibtex <- dataset$bibtex
-
+    
+    key_regex <- function(key) 
+      paste0(key, "\\s*=\\s*[\"{](.*?)[\"}]")
+    extract_bib <- function(bib, key) {
+      pattern <- key_regex(key)
+      match <- regexpr(key_regex(key), bib, perl = T)
+      gsub(pattern, "\\1", regmatches(bib, match), perl = T)
+    }
+    
+    citation_keys <- list("title", "author", "journal", "booktitle", "year", "volume", "number", "pages")
+    sum$citation <- lapply(
+      citation_keys,
+      function(key) extract_bib(dataset$bibtex, key)
+      )
+    names(sum$citation) <- citation_keys
+    
     my_dir <- "public/json/"
     if (!dir.exists(my_dir))
         dir.create(my_dir)
