@@ -9,9 +9,11 @@
 }
 
 /* Interaction with burger menu */
-#mobile_menu {
-    &:not(:checked) ~ .navbar-menu {
-        display: none;
+@media screen and (max-width: $desktop - 1) {
+    #mobile_menu {
+        &:not(:checked) ~ .navbar-menu {
+            display: none;
+        }
     }
 }
 
