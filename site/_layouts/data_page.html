@@ -56,7 +56,7 @@ hide-title: true
         {% for strategy in site.partitioning.strategy %}
         <td>
           {% for format in site.partitioning.format %}
-          <a class="button is-small is-white" href="{{ site.baseurl }}/public/partitions/{{ page.data['name'] }}-{{ strategy.id }}-{{ validation.id }}-{{ format.id }}.zip">{{ format.name }}</a>
+          <a class="button is-small is-white" href="{{ site.baseurl }}/public/partitions/{{ page.data['name'] }}-{{ strategy.id }}-{{ validation.id }}-{{ format.id }}.tar.gz">{{ format.name }}</a>
           {% endfor %}
         </td>
         {% endfor %}
@@ -128,6 +128,9 @@ hide-title: true
         </table>
       </div>
     </div>
+    
+    <div class="level"></div>
+    
     <div class="card">
       <header class="card-header">
         <p class="card-header-title">
@@ -135,9 +138,25 @@ hide-title: true
         </p>
       </header>
       <div class="card-content">
-        <div class="content">
-          <pre><code>{{ page.data["bibtex"] }}</code></pre>
+        <p class="menu-label">Text</p>
+        
+        <div class="message">
+          <p class="message-body">
+            {% assign citation = page.data["citation"] %}
+            {{ citation["author"] | replace: " and ", "; " }} ({{ citation["year"] }}).
+            {{ citation["title"] }}.
+            {% assign is_journal = citation["journal"] | size %}
+            {% assign is_book = citation["booktitle"] | size %}
+            {% if is_journal > 0 %}
+            In <em>{{ citation["journal"] }}, {{ citation["volume"] }}</em>({{ citation["number"] }}), {{ citation["pages"] }}.
+            {% elsif is_book > 0 %}
+            In <em>{{ citation["booktitle"] }}</em>, {{ citation["pages"] }}.
+            {% endif %}
+          </p>
         </div>
+        
+        <p class="menu-label">BibTeX</p>
+        <pre><code>{{ page.data["bibtex"] }}</code></pre>
       </div>
     </div>
   </div>
@@ -158,8 +177,10 @@ hide-title: true
 
     <div class="level"></div>
 
-    <nav class="panel attribute-panel">
-      <p class="panel-heading">Attributes</p>
+    <nav class="card panel attribute-panel">
+      <header class="card-header">
+        <p class="card-header-title">Attributes</p>
+      </header>
       <!--div class="panel-block">
         <p class="control has-icons-left">
           <input class="input is-small" type="text" placeholder="search">
@@ -209,5 +230,15 @@ hide-title: true
       </div>
     </nav>
 
+  </div>
+</div>
+
+<div class="level">
+  <div class="level-left"></div>
+  <div class="level-right">
+    <a class="button is-light" href="{{ site.baseurl }}/public/json/{{ page.data["name"] }}.json">
+      <span class="icon"><i class="fa fa-download"></i></span>
+      <span>Download this metadata in a machine-friendly format (JSON)</span>
+    </a>
   </div>
 </div>
