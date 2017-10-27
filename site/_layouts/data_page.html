@@ -173,6 +173,11 @@ hide-title: true
           <img src="{{ site.baseurl }}/public/img/{{ page.data['name'] }}.png">
         </figure>
       </div>
+      <div class="card-content">
+        <p class="help">
+          In this concurrence plot, sectors represent labels and links between them depict label co-occurrences.
+        </p>
+      </div>
     </div>
 
     <div class="level"></div>
@@ -221,10 +226,15 @@ hide-title: true
       </div>
 
       <div class="panel-content label-list">
-        {% for label in page.data["labels"] %}
+        {% assign labelnum = page.data["labels"] | size | minus: 1 %}
+        {% assign range = (0..labelnum) %}
+        {% for li in range %}
+        {% assign label = page.data["labels"][li] %}
         {% assign attr = page.data["attributes"][label] %}
         <span class="panel-block">
           {{ attr.name }}
+          &nbsp;
+          <span class="tag">SCUMBLE&nbsp;<strong>{{ page.data["scumble_labels"][li] }}</strong></span>
         </span>
         {% endfor %}
       </div>
