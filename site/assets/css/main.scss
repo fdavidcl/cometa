@@ -4,6 +4,10 @@
 @import "variables";
 @import "bulma";
 
+.help pre {
+    padding: $size-small/2 $size-small;
+}
+
 #hide_download {
     &:not(:checked) + .button + .button {
         display: none;

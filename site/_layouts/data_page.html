@@ -5,9 +5,16 @@ hide-title: true
 
 <div class="level">
   <div class="level-left">
-    <p class="title">
-      {{ page.data["name"] }}
-    </p>
+    <div class="level-item">
+      <p class="title">
+        {{ page.data["name"] }}
+      </p>
+    </div>
+    <div class="level-item">
+      <div class="help" title="Load {{ page.data["name"] }} in R with this command">
+        {% highlight r %}mldr.datasets::get.mldr("{{ page.data["name"] }}"){% endhighlight %}
+      </div>
+    </div>
   </div>
   <div class="level-right">
     <div class="level-item">
@@ -15,7 +22,7 @@ hide-title: true
         <p class="control">
           <a class="button is-primary is-medium" href="{{ site.baseurl }}/public/full/{{ page.data['name'] }}.rds">
             <span class="icon"><i class="fa fa-download"></i></span>
-            <span>Download (.rds)</span>
+            <span>Download</span>
           </a>
         </p>
         <p class="control">
@@ -156,7 +163,7 @@ hide-title: true
         </div>
         
         <p class="menu-label">BibTeX</p>
-        <pre><code>{{ page.data["bibtex"] }}</code></pre>
+        {% highlight python %}{{ page.data["bibtex"] }}{% endhighlight %}
       </div>
     </div>
   </div>
@@ -205,7 +212,15 @@ hide-title: true
       </p>
 
       <div class="panel-content attr-list">
-        {% for attr in page.data["attributes"] %}  
+        {% assign attrnum = page.data["attributes"] | size | minus: 1 %}
+        {% assign maxattrs = 199 %}
+        {% assign attrrange = (0..attrnum) %}
+        {% if attrnum > maxattrs %}
+        {% assign attrrange = (0..maxattrs) %}
+        {% endif %}
+
+        {% for i in attrrange %}
+        {% assign attr = page.data["attributes"][i] %}
         <span class="panel-block">
           <span class="tag"
                 {% if attr.type contains "{" %}
@@ -223,6 +238,11 @@ hide-title: true
           {{ attr.name }}
         </span>
         {% endfor %}
+        {% if attrnum > maxattrs %}
+        <span class="panel-block">
+          <p class="help">({{ attrnum | minus: maxattrs }} more attributes)</p>
+        </span>
+        {% endif %}
       </div>
 
       <div class="panel-content label-list">
