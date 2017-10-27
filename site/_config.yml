@@ -18,8 +18,6 @@ partitioning:
   validation:
     - id: hout
       name: Hold out
-    - id: 1x5
-      name: 1x5-fold cross validation
     - id: 2x5
       name: 2x5-fold cross validation
     - id: 1x10
