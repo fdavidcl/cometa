@@ -1,6 +1,15 @@
+# Set the title of your multilabel archive
 title: Cometa
 
+# Set the maintainer name and email
+maintainer:
+  name: David Charte
+  email: fdavidcl@protonmail.com
+
+# Set the root of your site (without trailing slash) e.g. "", "/data"
 baseurl: ""
+
+# Advanced configuration. Edit only if you know what you're doing
 permalink: pretty
 
 data_gen:
@@ -66,3 +75,10 @@ defaults:
       path: ""
     values:
       layout: "default"
+
+# Software attribution
+developers:
+  - Francisco Charte
+  - David Charte
+
+source_code: "https://github.com/fdavidcl/cometa"

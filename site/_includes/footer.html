@@ -2,7 +2,9 @@
   <div class="container">
     <div class="columns is-centered">
       <div class="column">
-        The datasets distributed inside this repository are property of their own rightful authors. You can find authorship and citation information inside each individual page.
+        The datasets distributed inside this repository are property of their own rightful authors.
+        You can find authorship and citation information inside each individual page.
+        If you are the author of one of these datasets and wish to remove it, please <a href="mailto:{{ site.maintainer.email }}">contact the site maintainers</a>.
       </div>
       <div class="column">
         <aside class="menu">
@@ -11,7 +13,7 @@
           </p>
           <ul class="menu-list">
             <li>
-              <a href="https://github.com/fdavidcl/cometa">
+              <a href="{{ site.source_code }}">
                 Source code
               </a>
             </li>
@@ -26,8 +28,8 @@
     </div>
     
     <div class="content has-text-centered">
-      <p>Powered by Cometa &copy; Francisco Charte, David Charte.
-        <a href="https://github.com/fdavidcl/cometa/LICENSE">See license information</a></p>
+      <p>Powered by <a href="{{ site.source_code }}">Cometa</a> &copy; {{ site.developers | join: ", " }}.
+        <a href="{{ site.source_code }}/blob/master/LICENSE">See license information</a></p>
     </div>
   </div>
 </footer>
