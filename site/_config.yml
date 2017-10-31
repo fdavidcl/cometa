@@ -6,8 +6,23 @@ maintainer:
   name: David Charte
   email: fdavidcl@protonmail.com
 
+
+citation:
+  apa: "Charte, F., Charte, D. (2017). Cometa: the comprehensive multilabel archive [https://cometa.ml]."
+  bibtex: >
+    @online{cometaml,
+      author = {Charte, Francisco and Charte, David},
+      title = {Cometa: the comprehensive multilabel archive},
+      year = 2017,
+      url = {https://cometa.ml}
+    }
+
 # Set the root of your site (without trailing slash) e.g. "", "/data"
 baseurl: ""
+
+# Choose an accent color. It can be any CSS color(e.g. #0080b0) or
+# a variable defined by Bulma https://bulma.io/documentation/overview/colors/
+accent: "#4c3470"
 
 # Advanced configuration. Edit only if you know what you're doing
 permalink: pretty
@@ -81,4 +96,6 @@ developers:
   - Francisco Charte
   - David Charte
 
-source_code: "https://github.com/fdavidcl/cometa"
+software:
+  name: Cometa
+  source: "https://github.com/fdavidcl/cometa"

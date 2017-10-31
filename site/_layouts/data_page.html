@@ -147,8 +147,8 @@ hide-title: true
       <div class="card-content">
         <p class="menu-label">Text</p>
         
-        <div class="message">
-          <p class="message-body">
+        <div class="content">
+          <blockquote>
             {% assign citation = page.data["citation"] %}
             {{ citation["author"] | replace: " and ", "; " }} ({{ citation["year"] }}).
             {{ citation["title"] }}.
@@ -159,7 +159,7 @@ hide-title: true
             {% elsif is_book > 0 %}
             In <em>{{ citation["booktitle"] }}</em>, {{ citation["pages"] }}.
             {% endif %}
-          </p>
+          </blockquote>
         </div>
         
         <p class="menu-label">BibTeX</p>

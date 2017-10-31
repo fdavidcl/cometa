@@ -1,9 +1,9 @@
 // Import the initial variables
 @import "sass/utilities/initial-variables";
 
-$orange: lighten(#FF9800, 10%);
-$orange-invert: $black;
-$primary: $cyan;
+$orange: darken(#FF851B, 10%);
+$orange-invert: $white;
+$primary: $orange;
 $primary-invert: $white;
 // $primary-invert: $orange-invert;
 

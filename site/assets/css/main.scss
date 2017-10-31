@@ -2,6 +2,9 @@
 ---
 
 @import "variables";
+
+$primary: {{ site.accent | default: "$orange" }};
+
 @import "bulma";
 
 .help pre {

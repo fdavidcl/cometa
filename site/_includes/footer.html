@@ -9,11 +9,11 @@
       <div class="column">
         <aside class="menu">
           <p class="menu-label">
-            Useful links
+            About {{ site.title }}
           </p>
           <ul class="menu-list">
             <li>
-              <a href="{{ site.source_code }}">
+              <a href="{{ site.software.source }}">
                 Source code
               </a>
             </li>
@@ -22,14 +22,23 @@
                 Self-host
               </a>
             </li>
+            <li>
+              <a href="{{ site.baseurl }}/citation">
+                Citing {{ site.title }}
+              </a>
+            </li>
           </ul>
         </aside>
       </div>
     </div>
-    
-    <div class="content has-text-centered">
-      <p>Powered by <a href="{{ site.source_code }}">Cometa</a> &copy; {{ site.developers | join: ", " }}.
-        <a href="{{ site.source_code }}/blob/master/LICENSE">See license information</a></p>
+
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <div class="content has-text-centered">
+          <p>Powered by <a href="{{ site.software.source }}">{{ site.software.name }}</a> &copy; {{ site.developers | join: ", " }}.
+            <a href="{{ site.software.source }}/blob/master/LICENSE">See license information</a></p>
+        </div>
+      </div>
     </div>
   </div>
 </footer>

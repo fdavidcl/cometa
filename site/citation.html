@@ -1,0 +1,21 @@
+---
+layout: page
+title: Citation
+---
+
+<div class="columns">
+  <div class="column is-half">
+    <div class="content">
+      <p>If you find {{ site.title }} useful for your research, please cite it as follows:</p>
+
+      <blockquote>
+        {{ site.citation.apa }}
+      </blockquote>
+
+      <p>We also provide the following BibLaTeX entry:</p>
+      {% highlight tex %}{{ site.citation.bibtex }}{% endhighlight %}
+
+      <p>Please remember to individually cite each dataset you use in your experimentation; citation information is provided within its page.</p>
+    </div>
+  </div>
+</div>
