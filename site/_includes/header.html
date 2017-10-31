@@ -20,13 +20,13 @@
 
       <div class="navbar-end">
         <a class="navbar-item {% if page.url == '/' %}is-active{% endif %}" href="{{ site.baseurl }}/">
-          About
+          Home
         </a>
         <a class="navbar-item {% if page.url == '/datasets/' %}is-active{% endif %}" href="{{ site.baseurl }}/datasets/">
           Browse datasets
         </a>
         <span class="navbar-item">
-          <a class="button" href="{{ site.software.source }}">
+          <a class="button is-primary is-inverted" href="{{ site.software.source }}">
             <span class="icon"><i class="fa fa-github"></i></span>
             <span>Source code</span>
           </a>

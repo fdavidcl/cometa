@@ -4,6 +4,11 @@ layout: page
 ---
 
 <div id="datasets">
+  
+  <div class="content is-hidden-desktop">
+    <p>Choose a dataset to access information and downloads:</p>
+  </div>
+  
   <div class="level">
     <div class="level-left">
       <div class="level-item">
@@ -37,7 +42,7 @@ layout: page
   </div>
 
   <div class="content">
-    <p class="help">
+    <p class="help is-hidden-touch">
       Click the name of a dataset to access information and downloads. Sort the table by clicking the corresponding header.
     </p>
     <table class="table is-fullwidth">
@@ -45,7 +50,7 @@ layout: page
         <tr>
           <th class="sort" data-sort="name">Name<span class="icon is-small"><i class="fa fa-sort"></i></span></th>
           {% for metric in site.dataset_metrics %}
-          <th class="sort" data-sort="{{ metric.id }}">{{ metric.name }}<span class="icon is-small"><i class="fa fa-sort"></i></span></th>
+          <th class="sort is-hidden-touch" data-sort="{{ metric.id }}">{{ metric.name }}<span class="icon is-small"><i class="fa fa-sort"></i></span></th>
           {% endfor %}
         </tr>
       </thead>
@@ -55,7 +60,7 @@ layout: page
         <tr>
           <td><a href="{{ site.baseurl }}/{{ site.data_gen.dir }}/{{ mld_h[0] }}"><strong class="name">{{ mld["name"] }}</strong></a></td>
           {% for metric in site.dataset_metrics %}
-          <td class="{{ metric.id }}">{{ mld[metric.id] }}</td>
+          <td class="{{ metric.id }} is-hidden-touch">{{ mld[metric.id] }}</td>
           {% endfor %}
         </tr>
         {% endfor %}
