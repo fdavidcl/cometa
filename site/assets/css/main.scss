@@ -7,6 +7,23 @@ $primary: {{ site.accent | default: "$orange" }};
 
 @import "bulma";
 
+/* Filled "O" in COMETA */
+.navbar-brand .navbar-item {
+    text-transform: uppercase;
+    font-weight: bold;
+    
+    o {
+        display: inline-block;
+        text-indent: -9999px;
+        width: 0.65em;
+        height: 0.70em;
+        background: $primary-invert;
+        border-radius: 50%;
+        vertical-align: baseline;
+        margin-right: 0.05em;
+    }
+}
+
 .help pre {
     padding: $size-small/2 $size-small;
 }
