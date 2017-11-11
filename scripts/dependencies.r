@@ -1,8 +1,6 @@
 #!/usr/bin/env Rscript
 
-# install.packages("devtools", repos = "https://cran.r-project.org")
-
-# devtools::install_github("rstudio/httpuv", args = "--configure-args='CFLAGS=-D__USE_MISC'")
+install.packages("devtools", repos = "https://cran.r-project.org")
 
 check_install <- function(pkg) {
   not_installed <- !(pkg %in% installed.packages())
@@ -11,5 +9,8 @@ check_install <- function(pkg) {
   else
     cat("All dependencies are installed!\n")
 }
+
+check_install("mldr")
+devtools::install_github("fcharte/mldr.datasets")
 
 check_install(commandArgs(trailingOnly = T))

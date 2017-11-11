@@ -2,6 +2,7 @@
 
 require 'highline'
 require_relative 'server.rb'
+require_relative 'scripts/compress_partitions.rb'
 
 module Cometa
   module Scripts
@@ -45,11 +46,17 @@ module Cometa
 Cometa can automatically partition your datasets for cross-validation uses. Should you so desire, Cometa will generate partitions for hold-out, 1x10 and 2x5 cross validation strategies in a variety of file formats. This process could take from minutes to hours depending on the number of datasets and their size.
 
 EOF
-
+      dir = "public/partitions"
+        
       if cli.agree("Do you want to partition your datasets? > ")
+        system "mkdir -p #{dir}"
+        
         datasets.each do |mld|
           Scripts.partition mld
         end
+
+        Scripts.compress dir, dir
+        Scripts.clean_partitions dir
       end
     end
 
@@ -95,6 +102,12 @@ EOF
             first
             cli.newline
             summarize
+            cli.newline
+            start_menu
+          end
+
+          menu.choice("Modify website configuration") do
+            system "nano /usr/app/site/_config.yml"
             cli.newline
             start_menu
           end

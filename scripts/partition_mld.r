@@ -6,13 +6,10 @@ require(mldr.datasets)
 STRATEGIES <-
   list(rand = mldr.datasets::random.kfolds,
        stra = mldr.datasets::stratified.kfolds,
-       iter = mldr.datasets::iterative.stratification.kfolds)
-FORMATS <-
-  list(
-    arff = c("MULAN", "MEKA"),
-    svm = "LibSVM",
-    dat = "KEEL"
-  )
+       iter = mldr.datasets::iterative.stratification.kfolds
+       )
+FORMATS <- c("mulan", "meka", "libsvm", "keel")
+
 SEED <- 23456123
 ALT_SEED <- 31638452
 
@@ -71,12 +68,10 @@ partition <- function(mld, name) {
 
         fold_object <- mldr::mldr_from_dataframe(mld$dataset[fold_list[[g]],], labelIndices = mld$labels$index, attributes = mld$attributes, name = mld$name)
 
-        for (f in FORMATS) {
-          mldr.datasets::write.mldr(fold_object, format = f, basename = basename, sparse = sparse)
-        }
+        mldr.datasets::write.mldr(fold_object, format = FORMATS, basename = basename, sparse = sparse)
 
         # RDS format
-        saveRDS(fold_list[[g]], file = paste0(basename, ".rds"))
+        saveRDS(fold_object, file = paste0(basename, ".rds"))
         cat("Exported", basename, "\n")
       }
     }
