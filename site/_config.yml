@@ -8,11 +8,11 @@ maintainer:
 
 
 citation:
-  apa: "Charte, F., Rivera, A. J., Charte, D. (2017). Cometa: the comprehensive multilabel archive [https://cometa.ml]."
+  apa: "Charte, F., Rivera, A. J., Charte, D. (2017). Cometa: the comprehensive multi-label data archive [https://cometa.ml]."
   bibtex: >
     @online{cometaml,
       author = {Charte, Francisco and Rivera, Antonio J. and Charte, David},
-      title = {Cometa: the comprehensive multilabel archive},
+      title = {Cometa: the comprehensive multi-label data archive},
       year = 2017,
       url = {https://cometa.ml}
     }
