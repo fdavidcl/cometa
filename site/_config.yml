@@ -8,13 +8,15 @@ maintainer:
 
 
 citation:
-  apa: "Charte, F., Rivera, A. J., Charte, D. (2017). Cometa: the comprehensive multi-label data archive [https://cometa.ml]."
+  apa: "Charte, F., Rivera, A. J., Charte, D., del Jesus, M. J., & Herrera, F. (2018). Tips, guidelines and tools for managing multi-label datasets: the mldr. datasets R package and the Cometa data repository. Neurocomputing."
   bibtex: >
-    @online{cometaml,
-      author = {Charte, Francisco and Rivera, Antonio J. and Charte, David},
-      title = {Cometa: the comprehensive multi-label data archive},
-      year = 2017,
-      url = {https://cometa.ml}
+    @article{cometaml,
+      title = "Tips, guidelines and tools for managing multi-label datasets: The mldr.datasets R package and the Cometa data repository",
+      journal = "Neurocomputing",
+      year = "2018",
+      issn = "0925-2312",
+      doi = "https://doi.org/10.1016/j.neucom.2018.02.011",
+      author = "Francisco Charte and Antonio J. Rivera and David Charte and María J. del Jesus and Francisco Herrera"
     }
 
 # Set the root of your site (without trailing slash) e.g. "", "/data"
