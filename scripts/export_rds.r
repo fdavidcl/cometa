@@ -1,7 +1,5 @@
 #!/usr/bin/env Rscript
 
-require(mldr.datasets)
-
 FORMATS <- c("mulan", "meka", "libsvm", "keel")
 
 main <- function(args = commandArgs(trailingOnly = T)) {
