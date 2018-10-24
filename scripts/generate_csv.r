@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-BASEURL <- "https://cometa.ml/public/full"
+BASEURL <- "https://cometa.ujaen.es/public/full"
 
 add_dataset <- function(df, file) {
   name <- sub(".rds", "", basename(file))

@@ -1,12 +1,12 @@
-# [Cometa](https://cometa.ml)
+# [Cometa](https://cometa.ujaen.es)
 
 > The comprehensive multi-label data archive
 
-Cometa is a collection of multi-label datasets, available at [cometa.ml](https://cometa.ml) in different 
+Cometa is a collection of multi-label datasets, available at [cometa.ujaen.es](https://cometa.ujaen.es) in different 
 formats and pre-partitioned.
 
 This repository holds the software pieces (scripts and website source) used to generate the archive. If you 
-want to host your own multi-label archive using Cometa, please refer to [this guide](https://cometa.ml/self-host).
+want to host your own multi-label archive using Cometa, please refer to [this guide](https://cometa.ujaen.es/self-host).
 
 ### Licenses
 
