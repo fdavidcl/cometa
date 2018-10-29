@@ -42,7 +42,9 @@ end
 
 if __FILE__ == $0
   if ARGV.length != 2
-    raise ArgumentError, "I need <source_dir> and <output_dir>"
+    puts "Compresses partitions into archives"
+    puts "Usage: $0 <source_dir> <output_dir>"
+    raise ArgumentError, "Incorrect arguments provided"
   end
 
   source_dir, output_dir = ARGV

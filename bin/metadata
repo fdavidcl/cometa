@@ -4,7 +4,18 @@ library(mldr)
 library(mldr.datasets)
 library(jsonlite)
 
-path <- commandArgs(trailingOnly = T)
+args <- commandArgs(trailingOnly = T)
+
+if (length(args) != 2) {
+    message(
+        "Extracts graphics and JSON metadata from an mldr object.\n",
+        "Usage: bin/metadata <input_rds> <output_dir>\n"
+    )
+    stop("Incorrect arguments provided")
+}
+
+path <- args[1]
+outdir <- args[2]
 mldname <- sub(".rds", "", basename(path), fixed = T)
 dataset <- readRDS(path)
 
@@ -50,11 +61,11 @@ if (class(dataset) == "mldr") {
                            extract_bib(dataset$bibtex, key))
   names(sum$citation) <- citation_keys
   
-  my_dir <- "public/json/"
+  my_dir <- file.path(outdir, "json")
   if (!dir.exists(my_dir))
     dir.create(my_dir)
   
-  sink(paste0(my_dir, mldname, ".json"))
+  sink(file.path(my_dir, paste0(mldname, ".json")))
   cat(toJSON(sum, pretty = T, auto_unbox = T))
   sink()
   
@@ -80,10 +91,10 @@ if (class(dataset) == "mldr") {
     dev.off()
   }
   
-  my_plot_dir <- "public/img/"
+  my_plot_dir <- file.path(outdir, "img")
   if (!dir.exists(my_plot_dir))
     dir.create(my_plot_dir)
-  filename <- paste0(my_plot_dir, mldname, ".png")
+  filename <- file.path(my_plot_dir, paste0(mldname, ".png"))
   
   amount <- 10
   tryPlot(filename, amount)

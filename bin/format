@@ -1,0 +1,22 @@
+#!/usr/bin/env Rscript
+
+FORMATS <- c("mulan", "meka", "libsvm", "keel")
+
+main <- function(args = commandArgs(trailingOnly = T)) {
+    if (length(args) != 2) {
+        message(
+            "Exports an mldr object onto RDS, MULAN, MEKA, LibSVM and KEEL formats.\n",
+            "Usage: bin/format <input_rds> <output_dir>\n"
+        )
+        stop("Incorrect arguments provided")
+    }
+    
+    path <- args[1]
+    outdir <- args[2]
+    
+    mld <- readRDS(path)
+    mldr.datasets::write.mldr(mld, format = FORMATS, basename = file.path(outdir, sub(".rds", "", basename(path))), sparse = mldr.datasets::sparsity(mld) > 0.5)
+    saveRDS(mld, file = file.path(outdir, basename(path)))
+}
+
+main()

@@ -1,6 +1,19 @@
 #!/usr/bin/env Rscript
 
-BASEURL <- "https://cometa.ujaen.es/public/full"
+args <- commandArgs(trailingOnly = T)
+
+if (length(args) < 2) {
+    message(
+        "Compiles all datasets from a directory in a CSV file.\n",
+        "Usage: bin/metadata <input_dir> <output_csv> [<prefix>]\n"
+    )
+    stop("Incorrect arguments provided")
+}
+
+BASEURL <- args[3]
+if (length(BASEURL) == 0) {
+    BASEURL <- ""
+}
 
 add_dataset <- function(df, file) {
   name <- sub(".rds", "", basename(file))
@@ -18,11 +31,11 @@ add_dataset <- function(df, file) {
 }
 
 
-files <- dir("public/full", pattern = "*.rds", full.names = T)
+files <- dir(args[1], pattern = "*.rds", full.names = T)
 
 datasets <- data.frame(Name = character(0), Instances = numeric(0), Attributes = numeric(0), Labels = numeric(0), URL = character(0), stringsAsFactors = F)
 
 for (f in files)
   datasets <- add_dataset(datasets, f)
 
-write.csv(datasets, file = "site/datasets_rds.csv", row.names = F)
+write.csv(datasets, file = args[2], row.names = F)
