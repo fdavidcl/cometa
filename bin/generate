@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ $# -ne 2 ]]; then
+    echo "Generates the website"
+    echo "Usage: $0 <origin_dir> <dest_dir>"
+    echo "Incorrect arguments specified"
+    exit -1
+fi
+
+bundle exec jekyll build -s $1 -d $2

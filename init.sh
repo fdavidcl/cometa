@@ -1,42 +1,47 @@
 #!/bin/bash
-
-function generate_pages {
-    bundle exec jekyll build -s site -d app
-}
+IFS='
+'
 
 function process_dataset {
-    local dataset=$1
+    local dataset="$1"
+    local name="${dataset##*/}"
+    local basename="${name%.*}"
 
-    bin/metadata $dataset public/
-    bin/format $dataset public/full/
-    mkdir -p public/partitions/$dataset
+    bin/metadata "$dataset" public/ || exit 1
+    cp public/json/"$basename".json site/_data/datasets 
+    bin/format $dataset public/full/ || exit 1
+    mkdir -p public/partitions/"$name"
     # Pretty slow:
-    bin/partition $dataset public/partitions/$dataset
-    bin/compress public/partitions/$dataset public/partitions
-    bin/link public/full site/datasets.csv "https://cometa.ujaen.es/public/full"
-    generate_pages
+    bin/partition "$dataset" public/partitions/"$name" || exit 1
+    bin/compress public/partitions/"$name" public/partitions || exit 1
+    rm -rf public/partitions/"$name"
+    bin/link public/full site/datasets_rds.csv "https://cometa.ujaen.es/public/full" || exit 1
+    bin/generate site app
     
-    rm $dataset
+    rm "$dataset"
 }
 
 function process_loop {
     # Set watch
     inotifywait -e moved_to -e create public/pending
-    local names=($(ls public/pending/*.rds 2> /dev/null))
+    local names=($(ls -1 public/pending/*.rds 2> /dev/null))
     echo "New datasets: $names"
 
     while [[ "${#names[@]}" -gt 0 ]]; do
         #echo "${names[0]}"
         #rm "${names[0]}"
-        process_dataset public/pending/"${names[1]}"
+        local current="${names[0]}"
+        echo "Now processing: $current"
+        process_dataset "$current"
         names=($(ls public/pending/*.rds 2> /dev/null))
     done
 }
 
 function main {
     mkdir -p public/{pending,full,partitions,json,img}
-    
-    #bin/serve app
+
+    bin/generate site app
+    bin/serve app &
 
     while true; do
         process_loop

@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+# coding: utf-8
+
+require 'rack'
+require 'rack/contrib'
+
+module Cometa
+  class Server
+    def self.run root, options = {}
+      opts = {}
+      opts[:Host] = options[:Host] || '0.0.0.0'
+      opts[:Port] = options[:Port] || 80
+      
+      server = Rack::Builder.new do |env|
+        map "/" do
+          use Rack::TryStatic, 
+              :urls => Dir.glob("#{root}/*").map { |f| f.sub(root, '') },
+              :root => File.expand_path(root),
+              :try  => ["index.html", "/index.html"]
+        end
+
+        map "/public/" do
+          use Rack::Static,
+              :urls => Dir.glob("public/*").map { |f| f.sub("public", "") },
+              :root => "public"
+        end
+
+        not_found = lambda do |env|
+          content = File.read("#{root}/404.html")
+          [
+            404,
+            {'Content-Type' => 'text/html', 'Content-Length' => content.length.to_s},
+            [content]
+          ]
+        end
+
+        run not_found
+      end
+      
+      Rack::Handler.pick(["thin", "puma"]).run server, opts
+    end
+  end
+end
+
+# main
+if __FILE__ == $0
+  if ARGV.empty?
+    puts "Serves the Cometa website"
+    puts "Usage: #{$0} <app_dir> [<port>]"
+    exit 1
+  end
+
+  port = ARGV[1] || 8080
+  
+  puts "Starting Cometa server..."
+  Cometa::Server.run ARGV[0], Port: port
+end

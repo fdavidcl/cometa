@@ -20,21 +20,18 @@ module Cometa
           validations.each do |val|
             formats.each do |key, frm|
               frm_match = "(" + frm.join("|") + ")"
-              file_match = /#{dat}-#{par}-#{val}-(\d+-)?(tra|tst)\.#{frm_match}$/
-              selected = partitions.select { |f| f =~ file_match }
+              # dat may contain parentheses... how to escape it in a regex?
+              file_match = /#{Regexp.quote(dat)}-#{par}-#{val}-(\d+-)?(tra|tst)\.#{frm_match}$/
+              selected = partitions.select { |f| f =~ file_match }.map { |f| %["#{f}"] }
               archive_name = "#{dat}-#{par}-#{val}-#{key}.tar.gz"
 
-              cmd = %[tar -zcf #{File.join(output_dir, archive_name)} --directory="#{source_dir}" #{selected.join " "}]
+              cmd = %[tar -zcf "#{File.join(output_dir, archive_name)}" --directory="#{source_dir}" #{selected.join " "}]
               puts cmd
               system cmd
             end
           end
         end
       end
-    end
-
-    def self.clean_partitions dir
-      system %[rm -r #{dir}/*.arff #{dir}/*.xml #{dir}/*.rds #{dir}/*.dat #{dir}/*.svm]
     end
   end
 end
