@@ -29,4 +29,4 @@ COPY . /usr/app
 
 EXPOSE 80
 
-ENTRYPOINT /usr/app/entry_point.sh
+ENTRYPOINT /usr/app/init.sh
