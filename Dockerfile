@@ -1,4 +1,4 @@
-FROM r-base:3.4.2
+FROM r-base:3.5.1
 MAINTAINER David Charte <fdavidcl@protonmail.com>
 
 ENV BUILD_PACKAGES bash curl ruby-dev build-essential libffi-dev libxml2-dev libssl-dev libcurl4-openssl-dev nano
@@ -19,9 +19,9 @@ COPY Gemfile.lock /usr/app/
 RUN bundle install --frozen
 
 # Install R dependencies
-RUN mkdir /usr/app/scripts
-COPY scripts/dependencies.r /usr/app/scripts
-RUN /usr/app/scripts/dependencies.r mldr jsonlite && \
+RUN mkdir /usr/app/bin
+COPY bin/r_install /usr/app/bin
+RUN /usr/app/bin/r_install mldr jsonlite && \
     rm -rf /tmp/*/downloaded_packages
 
 # Copy and run app

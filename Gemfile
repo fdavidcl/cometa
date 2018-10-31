@@ -10,7 +10,7 @@ gem "rack-rewrite"
 gem "thin"
 
 # For the web site
-gem "jekyll", "3.6.0"
+gem "jekyll", "~> 3.6"
 gem "json"
 
 group :jekyll_plugins do
