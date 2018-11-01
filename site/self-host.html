@@ -33,45 +33,45 @@ saveRDS(mydataset, file = "public/full/mydataset.rds"){% endhighlight %}
 
       <h2 class="title">Running Cometa</h2>
 
-      <p>Cometa is easy to self-host thanks to its Docker image. First, install Docker by following the <a href="https://docs.docker.com/engine/installation/">instructions on the official site</a>. Now run Cometa in interactive mode by running the following command in your terminal:</p>
+      <p>Cometa is easy to self-host thanks to its Docker image. First, install Docker by following the <a href="https://docs.docker.com/engine/installation/">instructions on the official site</a>. Now run Cometa in automatic mode by running the following command in your terminal:</p>
       
     </div>
   </div>
 </div>
 
 {% highlight bash %}
-docker run -itp 8080:80 --mount type=bind,source="$HOME/multilabel/public",target=/usr/app/public fdavidcl/cometa{% endhighlight %}
-
-<div class="columns">
-  <div class="column is-half">
-    <div class="content">
-      <p class="help">Use the path to your public folder instead of <code>$HOME/multilabel/public</code>. Cometa will look for your datasets in RDS format inside <code>full/</code>.</p>
-
-      <p>Wait for the download to complete, and you should see a welcome message and some options to choose:</p>
-      <ol>
-        <li>Partition datasets
-        <li>Create summaries of your data
-        <li>Launch Cometa server
-        <li>Quit
-      </ol>
-
-      <p>If you want to serve partitions of your datasets, the first option will run different partitioning and cross-validation strategies through your data. Bear in mind this could take from minutes to several hours depending on the size of the datasets.</p>
-
-      <p>The second option will create the metadata necessary to display metrics and other information about your dataset in the website.</p>
-
-      <p>Once the metadata has been generated, you can run the web server and access <code>http://localhost:8080</code> to browse your Cometa-powered website. In order to run the web server non-interactively, please use the following command:</p>
-    </div>
-  </div>
-</div>
-
-{% highlight bash %}
-docker run -dp 8080:80 --mount type=bind,source="$HOME/multilabel/public",target=/usr/app/public fdavidcl/cometa{% endhighlight %}
+mkdir public
+docker run -dp 8080:80 \
+  --mount type=bind,source="$(pwd)/public",target=/usr/app/public \
+  --name cometa1 
+  fdavidcl/cometa:latest{% endhighlight %}
 
 <div class="columns">
   <div class="column is-half">
     <div class="content">
       <p class="help">This runs Docker in detached mode so you will not see a log or a terminal prompt.</p>
+
+      <p>From now on, the web repository will be served at port 8080 (visit <code>localhost:8080</code> in your browser to see the repository). Cometa will listen for new datasets in the folder <code>public/pending</code> in mldr (<code>.rds</code>) format. Any new incoming dataset will be partitioned and its metadata will be extracted in order to display it on the repository. Partitions will be created inside <code>public/partitions</code>, and the full dataset will be converted to several formats in <code>public/full</code>.
     </div>
   </div>
 </div>
+
+<div class="columns">
+  <div class="column is-half">
+    <div class="content">
+      <h2 class="title">Running Cometa in interactive mode</h2>
+      <p>If you do not want Cometa to run in automatic mode, you can launch it interactively by changing <code>-dp</code> for <code>-itp</code> in the previous <code>docker run</code> command. Wait for the download to complete, and you should see a welcome message and some options to choose:</p>
+      <ol>
+        <li>Automatic: default behavior in non-interactive mode.
+        <li>Only partitioning: partitions all datasets in <code>public/pending</code> and exits the program.
+        <li>Only serve website: launches a web server for the included dataset repository.
+        <li>Drop to a terminal: advanced mode.
+        <li>Quit
+      </ol>
+
+      <p>The second option will run different partitioning and cross-validation strategies through your data. Bear in mind this could take from minutes to several hours depending on the size of the datasets.</p>
+    </div>
+  </div>
+</div>
+
 

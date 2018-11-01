@@ -1,7 +1,7 @@
 FROM r-base:3.5.1
 MAINTAINER David Charte <fdavidcl@protonmail.com>
 
-ENV BUILD_PACKAGES bash curl ruby-dev build-essential libffi-dev libxml2-dev libssl-dev libcurl4-openssl-dev nano
+ENV BUILD_PACKAGES bash curl ruby-dev build-essential libffi-dev libxml2-dev libssl-dev libcurl4-openssl-dev nano inotify-tools
 ENV RUBY_PACKAGES ruby ruby-bundler
 
 # Update and install all of the required packages.

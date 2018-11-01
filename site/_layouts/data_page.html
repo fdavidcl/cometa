@@ -18,22 +18,16 @@ hide-title: true
   </div>
   <div class="level-right">
     <div class="level-item">
-      <div class="field has-addons">
-        <p class="control">
-          <a class="button is-primary is-medium" href="{{ site.baseurl }}/public/full/{{ page.data['name'] }}.rds">
-            <span class="icon"><i class="fa fa-download"></i></span>
-            <span>Download</span>
-          </a>
-        </p>
+      <div class="field">
         <p class="control">
           <input type="radio" name="download" id="hide_download" checked hidden>
-          <label class="button is-medium" disabled>
-            <span class="icon"><i class="fa fa-puzzle-piece"></i></span>
-            <span>Download partitions</span>
+          <label class="button is-primary is-medium" disabled>
+            <span class="icon"><i class="fa fa-download"></i></span>
+            <span>Download</span>
           </label>
-          <label class="button is-medium" for="show_download">
-            <span class="icon"><i class="fa fa-puzzle-piece"></i></span>
-            <span>Download partitions</span>
+          <label class="button is-primary is-medium" for="show_download">
+            <span class="icon"><i class="fa fa-download"></i></span>
+            <span>Download</span>
           </label>
         </p>
       </div>
@@ -46,31 +40,55 @@ hide-title: true
 <input type="radio" name="download" id="show_download" hidden>
 <div class="message download-partitions">
   <div class="message-header">
-    <p>Select your desired partitioning strategy, validation and format</p>
+    <p>Select your download</p>
     <label class="delete" aria-label="delete" for="hide_download"></label>
   </div>
   <div class="message-body">
-    <table class="table is-fullwidth">
-      <thead>
-        <th></th>
-        {% for strategy in site.partitioning.strategy %}
-        <th>{{ strategy.name }}</th>
-        {% endfor %}
-      </thead>
-      {% for validation in site.partitioning.validation %}
-      <tr>
-        <th>{{ validation.name }}</th>
-        {% for strategy in site.partitioning.strategy %}
-        <td>
-          {% for format in site.partitioning.format %}
-          <a class="button is-small is-white" href="{{ site.baseurl }}/public/partitions/{{ page.data['name'] }}-{{ strategy.id }}-{{ validation.id }}-{{ format.id }}.tar.gz">{{ format.name }}</a>
-          {% endfor %}
-        </td>
-        {% endfor %}
 
-      </tr>
-      {% endfor %}
-    </table>
+    <div class="box">
+      <p class="title is-5">
+        Full dataset
+      </p>
+      <a class="button" href="{{ site.baseurl }}/public/full/{{ page.data['name'] }}.arff">
+        <span>MULAN/MEKA (.arff)</span>
+      </a>
+      <a class="button" href="{{ site.baseurl }}/public/full/{{ page.data['name'] }}.xml">
+        <span>MULAN (.xml)</span>
+      </a>
+      <a class="button" href="{{ site.baseurl }}/public/full/{{ page.data['name'] }}.svm">
+        <span>LibSVM</span>
+      </a>
+      <a class="button" href="{{ site.baseurl }}/public/full/{{ page.data['name'] }}.dat">
+        <span>KEEL</span>
+      </a>
+      <a class="button" href="{{ site.baseurl }}/public/full/{{ page.data['name'] }}.rds">
+        <span>mldr</span>
+      </a>
+    </div>
+    <div class="box">
+      <p class="title is-5">Partitions: select your desired partitioning strategy, validation and format</p>
+      <table class="table is-fullwidth">
+        <thead>
+          <th></th>
+          {% for strategy in site.partitioning.strategy %}
+          <th>{{ strategy.name }}</th>
+          {% endfor %}
+        </thead>
+        {% for validation in site.partitioning.validation %}
+        <tr>
+          <th>{{ validation.name }}</th>
+          {% for strategy in site.partitioning.strategy %}
+          <td>
+            {% for format in site.partitioning.format %}
+            <a class="button is-small" href="{{ site.baseurl }}/public/partitions/{{ page.data['name'] }}-{{ strategy.id }}-{{ validation.id }}-{{ format.id }}.tar.gz">{{ format.name }}</a>
+            {% endfor %}
+          </td>
+          {% endfor %}
+
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
   </div>
 </div>
 
@@ -194,73 +212,73 @@ hide-title: true
         <p class="card-header-title">Attributes</p>
       </header>
       <!--div class="panel-block">
-        <p class="control has-icons-left">
-          <input class="input is-small" type="text" placeholder="search">
-          <span class="icon is-small is-left">
-            <i class="fa fa-search"></i>
-          </span>
-        </p>
-      </div-->
+          <p class="control has-icons-left">
+            <input class="input is-small" type="text" placeholder="search">
+            <span class="icon is-small is-left">
+              <i class="fa fa-search"></i>
+            </span>
+          </p>
+</div-->
 
-      <input type="radio" name="attr" id="attr_all" hidden checked>
-      <input type="radio" name="attr" id="attr_labels" hidden>
-      
+  <input type="radio" name="attr" id="attr_all" hidden checked>
+  <input type="radio" name="attr" id="attr_labels" hidden>
+  
       <p class="panel-tabs">
         <a class="attr-all"><label for="attr_all">all attributes</label></a>
         <!--a>inputs</a-->
-        <a class="attr-labels"><label for="attr_labels">labels</label></a>
-      </p>
+  <a class="attr-labels"><label for="attr_labels">labels</label></a>
+</p>
 
-      <div class="panel-content attr-list">
-        {% assign attrnum = page.data["attributes"] | size | minus: 1 %}
-        {% assign maxattrs = 199 %}
-        {% assign attrrange = (0..attrnum) %}
-        {% if attrnum > maxattrs %}
-        {% assign attrrange = (0..maxattrs) %}
-        {% endif %}
+<div class="panel-content attr-list">
+  {% assign attrnum = page.data["attributes"] | size | minus: 1 %}
+  {% assign maxattrs = 199 %}
+  {% assign attrrange = (0..attrnum) %}
+  {% if attrnum > maxattrs %}
+{% assign attrrange = (0..maxattrs) %}
+{% endif %}
 
-        {% for i in attrrange %}
-        {% assign attr = page.data["attributes"][i] %}
-        <span class="panel-block">
-          <span class="tag"
-                {% if attr.type contains "{" %}
-                title="{{ attr.type }}">
-            {% if attr.type == "{0,1}" or attr.type == "{0, 1}" %}
-            binary
-            {% else %}
-            categorical
-            {% endif %}
-            {% else %}
-            >{{ attr.type }}
-            {% endif %}
-          </span>
-          &nbsp;
-          {{ attr.name }}
-        </span>
-        {% endfor %}
-        {% if attrnum > maxattrs %}
-        <span class="panel-block">
-          <p class="help">({{ attrnum | minus: maxattrs }} more attributes)</p>
-        </span>
-        {% endif %}
-      </div>
+{% for i in attrrange %}
+{% assign attr = page.data["attributes"][i] %}
+<span class="panel-block">
+  <span class="tag"
+        {% if attr.type contains "{" %}
+        title="{{ attr.type }}">
+    {% if attr.type == "{0,1}" or attr.type == "{0, 1}" %}
+    binary
+    {% else %}
+    categorical
+    {% endif %}
+    {% else %}
+    >{{ attr.type }}
+    {% endif %}
+  </span>
+  &nbsp;
+  {{ attr.name }}
+</span>
+{% endfor %}
+{% if attrnum > maxattrs %}
+<span class="panel-block">
+  <p class="help">({{ attrnum | minus: maxattrs }} more attributes)</p>
+</span>
+{% endif %}
+</div>
 
-      <div class="panel-content label-list">
-        {% assign labelnum = page.data["labels"] | size | minus: 1 %}
-        {% assign range = (0..labelnum) %}
-        {% for li in range %}
-        {% assign label = page.data["labels"][li] %}
-        {% assign attr = page.data["attributes"][label] %}
-        <span class="panel-block">
-          {{ attr.name }}
-          &nbsp;
-          <span class="tag">SCUMBLE&nbsp;<strong>{{ page.data["scumble_labels"][li] }}</strong></span>
-        </span>
-        {% endfor %}
-      </div>
-    </nav>
+<div class="panel-content label-list">
+  {% assign labelnum = page.data["labels"] | size | minus: 1 %}
+  {% assign range = (0..labelnum) %}
+  {% for li in range %}
+  {% assign label = page.data["labels"][li] %}
+  {% assign attr = page.data["attributes"][label] %}
+  <span class="panel-block">
+    {{ attr.name }}
+    &nbsp;
+    <span class="tag">SCUMBLE&nbsp;<strong>{{ page.data["scumble_labels"][li] }}</strong></span>
+  </span>
+  {% endfor %}
+</div>
+</nav>
 
-  </div>
+</div>
 </div>
 
 <div class="level">

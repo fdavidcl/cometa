@@ -19,9 +19,9 @@ docker build -t mycometa .
 To run your own image:
 
 ```
-mkdir ../public
+mkdir public
 docker run -dp 8080:80 \
-  --mount type=bind,source="../public",target=/usr/app/public \
+  --mount type=bind,source="$(pwd)/public",target=/usr/app/public \
   --name cometa1 
   mycometa
 ```
@@ -31,7 +31,7 @@ docker run -dp 8080:80 \
 ```
 mkdir public
 docker run -dp 8080:80 \
-  --mount type=bind,source="public",target=/usr/app/public \
+  --mount type=bind,source="$(pwd)/public",target=/usr/app/public \
   --name cometa1 
   fdavidcl/cometa:latest
 ```
@@ -41,6 +41,16 @@ To stop and restart your container:
 ```
 docker stop cometa1
 docker start cometa1
+```
+
+## Run image in interactive mode
+
+```
+mkdir public
+docker run -dp 8080:80 \
+  --mount type=bind,source="public",target=/usr/app/public \
+  --name cometa1 
+  fdavidcl/cometa:latest
 ```
 
 ## Licenses
