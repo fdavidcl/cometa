@@ -96,7 +96,6 @@ function manage_options {
         3)
             # If there are existing datasets, we need to copy their
             # metadata to the template site
-            cp public/json/*.json site/_data/datasets 2>/dev/null
             bin/generate site app
             bin/serve app
             ;;
@@ -119,6 +118,7 @@ function manage_options {
 # cd /usr/app
 if [[ -d public ]]; then
     mkdir -p public/{pending,full,partitions,json,img}
+    cp public/json/*.json site/_data/datasets 2>/dev/null
     
     if [ -t 0 ]; then
         welcome
