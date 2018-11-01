@@ -7,6 +7,15 @@ $primary: {{ site.accent | default: "$orange" }};
 
 @import "bulma";
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+footer {
+    flex: 1;
+}
+
 /* Filled "O" in COMETA */
 .navbar-brand .navbar-item {
     text-transform: uppercase;
