@@ -6,7 +6,14 @@ maintainer:
   name: David Charte
   email: fdavidcl@protonmail.com
 
+# Enable or disable submission system
+submission:
+  enabled: false
+  repo: "user/repo"
+  token: "Paste a token from https://github.com/settings/tokens"
 
+
+# Citation contents
 citation:
   apa: "Charte, F., Rivera, A. J., Charte, D., del Jesus, M. J., & Herrera, F. (2018). Tips, guidelines and tools for managing multi-label datasets: the mldr. datasets R package and the Cometa data repository. Neurocomputing."
   bibtex: >

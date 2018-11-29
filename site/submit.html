@@ -1,0 +1,66 @@
+---
+layout: page
+title: Submit a new dataset
+---
+
+{% if site.submission.enabled %}
+<form action="{{ site.baseurl }}/new/" method="post">
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <label class="label" for="name">Name</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Name of the dataset" name="name" id="name" required>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <label class="label" for="url">File URL</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="https://example.org/dataset.rds" name="url" id="url" required>
+        </div>
+        <p class="help">We do not allow direct uploads to Cometa due to the possible size of some datasets.</p>
+      </div>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <label class="label" for="author">Your name</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Ada Smith" name="author" id="author" required>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <label class="label" for="email">Your email</label>
+        <div class="control">
+          <input class="input" type="email" placeholder="example@university.edu" name="email" id="email" required>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Comments</label>
+    <p class="help is-primary">Please include any citation information if available</p>
+    <div class="control">
+      <textarea class="textarea" placeholder="(Optional)" name="comments"></textarea>
+    </div>
+  </div>  
+
+  <div class="field">
+    <div class="control">
+      <input class="button is-primary" value="Submit" type="submit">
+    </div>
+    <p class="help">A new GitHub issue will be opened automatically for you.</p>
+  </div>
+</form>
+{% else %}
+<div class="message is-warning">
+  <p class="message-body">
+    Submission is disabled in this repository.
+  </p>
+</div>
+{% endif %}

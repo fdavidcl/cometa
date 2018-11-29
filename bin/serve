@@ -3,15 +3,95 @@
 
 require 'rack'
 require 'rack/contrib'
+require 'net/http'
+require 'json'
+require 'yaml'
+require 'uri'
+
+require 'openssl'
+require 'jwt'  # https://rubygems.org/gems/jwt
+
 
 module Cometa
+  class SubmitHandler
+    def self.call(env)
+      req = Rack::Request.new(env)
+      conf = YAML.load_file("site/_config.yml")["submission"] || {enabled: false}
+
+      if !req.post?
+        return [302, {"Location" => "/submit"}, "Found"]
+      end
+
+      if !conf["enabled"]
+        return [404, {}, "Not Found"]
+      end
+      
+      begin
+        form = req.body.read.split("&").map do |s|
+          pair = s.split("=")
+          pair[1] = URI.decode pair[1].gsub("+", " ")
+          pair
+        end.to_h
+
+        if [form["name"], form["url"], form["author"], form["email"]].any? &:nil?
+          return [400, {}, "Bad Request"]
+        end
+
+        if form["comments"].nil?
+          form["comments"] = ""
+        end
+        
+        title = "Dataset submission: #{form["name"]}"
+        body = <<END
+|Metadata|Value|
+|--------|-----|
+|Dataset name|#{form["name"]}|
+|URL|#{form["url"]}|
+|Submitted by|#{form["author"]} <<#{form["email"]}>>|
+|Comments|#{form["comments"]}|
+END
+        
+        uri = URI("https://api.github.com/repos/#{conf["repo"]}/issues")
+        issue = Net::HTTP::Post.new(
+          uri,
+          'Content-Type' => 'application/json',
+          'Authorization' => "token #{conf["token"]}",
+          'User-Agent' => 'Cometa'
+        )
+        issue.body = {
+          'title' => title,
+          'body' => body
+        }.to_json
+        
+        http = Net::HTTP.new(uri.hostname, uri.port)
+        http.use_ssl = true
+        res = http.request(issue)
+
+        if res.code == "201"
+          data = JSON.parse res.body
+
+          redir = Rack::Response.new
+          redir["Location"] = data["html_url"]
+          redir.status = 303
+          redir.body = ["See Other"]
+          redir.finish
+        else
+          [500, {}, "Unexpected error"]
+        end
+      rescue StandardError => e
+        puts e
+        [400, {}, "Bad Request"]
+      end
+    end
+  end
+  
   class Server
     def self.run root, options = {}
       opts = {}
       opts[:Host] = options[:Host] || '0.0.0.0'
       opts[:Port] = options[:Port] || 80
       
-      server = Rack::Builder.new do |env|
+      server = Rack::Builder.new do
         map "/" do
           use Rack::TryStatic, 
               :urls => Dir.glob("#{root}/*").map { |f| f.sub(root, '') },
@@ -23,6 +103,10 @@ module Cometa
           use Rack::Static,
               :urls => Dir.glob("public/*").map { |f| f.sub("public", "") },
               :root => "public"
+        end
+        
+        map "/new/" do
+            run SubmitHandler
         end
 
         not_found = lambda do |env|

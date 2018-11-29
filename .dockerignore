@@ -1,7 +1,9 @@
 app
 .*
+*~
 
 public
+site/_secret*
 site/public
 site/_site
 site/_data/datasets/*.json

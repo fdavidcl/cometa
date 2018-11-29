@@ -25,6 +25,11 @@
         <a class="navbar-item {% if page.url == '/datasets/' %}is-active{% endif %}" href="{{ site.baseurl }}/datasets/">
           Browse datasets
         </a>
+        {% if site.submission.enabled %}
+        <a class="navbar-item {% if page.url == '/submit/' %}is-active{% endif %}" href="{{ site.baseurl }}/submit/">
+          Submit a dataset
+        </a>
+        {% endif %}
         <span class="navbar-item">
           <a class="button is-primary is-inverted" href="{{ site.software.source }}">
             <span class="icon"><i class="fa fa-github"></i></span>
