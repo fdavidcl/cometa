@@ -11,9 +11,12 @@ function process_dataset {
     cp public/json/"$basename".json site/_data/datasets 
     bin/format $dataset public/full/ || exit 1
     mkdir -p public/partitions/"$name"
+    
     # Pretty slow:
-    bin/partition "$dataset" public/partitions/"$name" || exit 1
-    bin/compress public/partitions/"$name" public/partitions || exit 1
+    if [ "$1" == "unpartitioned" ]; then
+        bin/partition "$dataset" public/partitions/"$name" || exit 1
+        bin/compress public/partitions/"$name" public/partitions || exit 1
+    fi
     rm -rf public/partitions/"$name"
     bin/link public/full site/datasets_rds.csv "https://cometa.ujaen.es/public/full" || exit 1
     
@@ -21,7 +24,7 @@ function process_dataset {
 }
 
 function process {
-    local names=($(ls -1 public/pending/*.rds 2> /dev/null))
+    local names=($(ls -1 public/pending/"$1"/*.rds 2> /dev/null))
     echo "New datasets: $names"
 
     while [[ "${#names[@]}" -gt 0 ]]; do
@@ -29,8 +32,17 @@ function process {
         #rm "${names[0]}"
         local current="${names[0]}"
         echo -e "\e[1mNow processing: $current\e[m"
-        process_dataset "$current"
-        names=($(ls public/pending/*.rds 2> /dev/null))
+        process_dataset "$current" "$1"
+        names=($(ls public/pending/"$1"/*.rds 2> /dev/null))
+    done
+}
+
+function loop {
+    while true; do
+        # Set watch
+        inotifywait -e moved_to -e create public/pending/"$1"
+        process "$1"
+        bin/generate site app
     done
 }
 
@@ -38,12 +50,8 @@ function main {
     bin/generate site app
     bin/serve app &
 
-    while true; do
-        # Set watch
-        inotifywait -e moved_to -e create public/pending
-        process
-        bin/generate site app
-    done
+    loop partitioned &
+    loop unpartitioned
 }
 
 function welcome {
@@ -70,10 +78,12 @@ In order to continue, choose an option below:
 ============================================================
 
 \e[1m1. Automatic\e[m
-   Detect new RDS files in \e[4mpublic/pending\e[m in order to
-   automatically partition them and generate a web repository.
+   Detect new RDS files in \e[4mpublic/pending/unpartitioned\e[m 
+   in order to automatically partition them and generate a web 
+   repository.
 \e[1m2. Only partitioning\e[m
-   Partition all datasets in \e[4mpublic/pending\e[m and exit.
+   Partition all datasets in \e[4mpublic/pending/unpartitioned\e[m
+   and exit.
 \e[1m3. Only serve website\e[m
    Generates a web repository and serves it.
 \e[1m4. \e[31mAdvanced: drop to a terminal\e[m
@@ -117,7 +127,7 @@ function manage_options {
 
 # cd /usr/app
 if [[ -d public ]]; then
-    mkdir -p public/{pending,full,partitions,json,img}
+    mkdir -p public/{pending/partitioned,pending/unpartitioned,full,partitions,json,img}
     cp public/json/*.json site/_data/datasets 2>/dev/null
     
     if [ -t 0 ]; then
