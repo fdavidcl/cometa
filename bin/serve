@@ -8,10 +8,6 @@ require 'json'
 require 'yaml'
 require 'uri'
 
-require 'openssl'
-require 'jwt'  # https://rubygems.org/gems/jwt
-
-
 module Cometa
   class SubmitHandler
     def self.call(env)
