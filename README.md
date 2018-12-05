@@ -47,11 +47,16 @@ docker start cometa1
 
 ```
 mkdir public
-docker run -dp 8080:80 \
+docker run -itp 8080:80 \
   --mount type=bind,source="public",target=/usr/app/public \
   --name cometa1 
   fdavidcl/cometa:latest
 ```
+
+It is recommended to use the detached mode and [`docker 
+exec`](https://docs.docker.com/engine/reference/commandline/exec/) if you just want to execute 
+commands inside the container (e.g. changing `site/_config.yml` in order to allow dataset 
+submissions).
 
 ## Licenses
 
