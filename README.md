@@ -71,7 +71,7 @@ docker run -dp 8080:80 \
   --mount type=bind,source="$(pwd)/public",target=/usr/app/public \
   --name cometa1 \
   -e SUBMISSION_REPO="example/cometa" \
-  -e SUBMISSION_TOKEN=123456abcdef7890ghij
+  -e SUBMISSION_TOKEN=123456abcdef7890ghij \
   fdavidcl/cometa:latest
 ```
 
