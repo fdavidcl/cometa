@@ -47,6 +47,10 @@ function loop {
 }
 
 function main {
+    if [[ ! -z "$SUBMISSION_TOKEN" ]]; then
+        bin/set_token "$SUBMISSION_REPO" "$SUBMISSION_TOKEN"
+    fi
+    
     bin/generate site app
     bin/serve app &
 

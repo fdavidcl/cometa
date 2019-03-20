@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+require 'bundler/setup'
+require 'yaml'
+
+if __FILE__ == $0
+  if ARGV.empty?
+    puts "Sets a token for submissions"
+    puts "Usage: #{$0} <repo> <token>"
+    exit 1
+  end
+  
+  conf = YAML.load_file("site/_config.yml")
+  conf["submission"]["enabled"] = true
+  conf["submission"]["repo"] = ARGV[0]
+  conf["submission"]["token"] = ARGV[1]
+  File.open("site/_config.yml", "w") { |f| f.write(conf.to_yaml) }
+end

@@ -24,11 +24,11 @@ add_dataset <- function(file) {
   
   mld <- readRDS(file)
   list(
-    name,
-    mld$measures$num.instances,
-    mld$measures$num.attributes,
-    mld$measures$num.labels,
-    paste0(BASEURL, "/", name, ".rds")
+    Name = name,
+    Instances = mld$measures$num.instances,
+    Attributes = mld$measures$num.attributes,
+    Labels = mld$measures$num.labels,
+    URL = paste0(BASEURL, "/", name, ".rds")
   )
 }
 
@@ -36,14 +36,16 @@ files <- dir(args[1], pattern = "\\.rds$", full.names = T)
 
 datasets <- data.frame(Name = character(0), Instances = numeric(0), Attributes = numeric(0), Labels = numeric(0), URL = character(0), stringsAsFactors = FALSE)
 
+print(colnames(datasets))
+
 if (file.exists(args[2])) {
-    datasets <- rbind(datasets, read.csv(args[2], stringsAsFactors = FALSE))
+    datasets <- rbind(datasets, read.csv(args[2], stringsAsFactors = FALSE), stringsAsFactors = FALSE)
 }
 
 for (f in files) {
     if (!(name_of(f) %in% datasets$Name)) {
         cat("Adding", name_of(f), "to CSV file\n")
-        datasets <- rbind(datasets, add_dataset(f))
+        datasets <- rbind(datasets, add_dataset(f), stringsAsFactors = FALSE)
     }
 }
 

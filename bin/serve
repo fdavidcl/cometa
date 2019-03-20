@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # coding: utf-8
 
+require 'bundler/setup'
 require 'rack'
 require 'rack/contrib'
 require 'net/http'
