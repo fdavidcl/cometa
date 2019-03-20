@@ -60,7 +60,17 @@ docker run -dp 8080:80 \
   <div class="column is-half">
     <div class="content">
       <h2 class="title">Running Cometa in interactive mode</h2>
-      <p>If you do not want Cometa to run in automatic mode, you can launch it interactively by changing <code>-dp</code> for <code>-itp</code> in the previous <code>docker run</code> command. Wait for the download to complete, and you should see a welcome message and some options to choose:</p>
+      <p>If you do not want Cometa to run in automatic mode, you can launch it interactively by changing <code>-dp</code> for <code>-itp</code> in the previous <code>docker run</code> command. Use <code>--rm</code> as well in order to throw away your container when you've finished using it:</p>
+
+{% highlight bash %}
+mkdir public
+docker run --rm -itp 8080:80 \
+  --mount type=bind,source="$(pwd)/public",target=/usr/app/public \
+  --name cometa1 
+  fdavidcl/cometa:latest{% endhighlight %}
+
+        
+        <p>Wait for the download to complete, and you should see a welcome message and some options to choose:</p>
       <ol>
         <li>Automatic: default behavior in non-interactive mode.
         <li>Only partitioning: partitions all datasets in <code>public/pending</code> and exits the program.
