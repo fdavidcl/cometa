@@ -47,7 +47,7 @@ docker start cometa1
 
 ```
 mkdir public
-docker run -itp 8080:80 \
+docker run --rm -itp 8080:80 \
   --mount type=bind,source="public",target=/usr/app/public \
   --name cometa1 
   fdavidcl/cometa:latest
