@@ -22,7 +22,7 @@ To run your own image:
 mkdir public
 docker run -dp 8080:80 \
   --mount type=bind,source="$(pwd)/public",target=/usr/app/public \
-  --name cometa1 
+  --name cometa1 \
   mycometa
 ```
 
@@ -32,7 +32,7 @@ docker run -dp 8080:80 \
 mkdir public
 docker run -dp 8080:80 \
   --mount type=bind,source="$(pwd)/public",target=/usr/app/public \
-  --name cometa1 
+  --name cometa1 \
   fdavidcl/cometa:latest
 ```
 
@@ -49,14 +49,31 @@ docker start cometa1
 mkdir public
 docker run --rm -itp 8080:80 \
   --mount type=bind,source="public",target=/usr/app/public \
-  --name cometa1 
+  --name cometa1 \
   fdavidcl/cometa:latest
 ```
 
 It is recommended to use the detached mode and [`docker 
 exec`](https://docs.docker.com/engine/reference/commandline/exec/) if you just want to execute 
-commands inside the container (e.g. changing `site/_config.yml` in order to allow dataset 
-submissions).
+commands inside the container (e.g. changing `site/_config.yml`).
+
+## Allowing dataset submissions
+
+Run with environment variables:
+
+- `SUBMISSION_REPO`: A GitHub repository in the format `user/repo` where issues will be created when a dataset is submitted.
+- `SUBMISSION_TOKEN`: A [personal access token](https://github.com/settings/tokens) from GitHub to automatically open issues.
+
+Example:
+
+```
+docker run -dp 8080:80 \
+  --mount type=bind,source="$(pwd)/public",target=/usr/app/public \
+  --name cometa1 \
+  -e SUBMISSION_REPO="example/cometa" \
+  -e SUBMISSION_TOKEN=123456abcdef7890ghij
+  fdavidcl/cometa:latest
+```
 
 ## Licenses
 
