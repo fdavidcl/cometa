@@ -44,7 +44,7 @@ GEM
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
     public_suffix (3.0.3)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-contrib (2.1.0)
       rack (~> 2.0)
     rack-rewrite (1.5.1)
@@ -68,14 +68,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ffi (>= 1.9.24)
   highline
-  jekyll (~> 3.6)
+  jekyll (>= 3.6.3)
   json
-  rack
+  rack (>= 2.0.6)
   rack-contrib
   rack-rewrite
   thin
   tzinfo-data
 
 BUNDLED WITH
-   1.17.1
+   2.0.1

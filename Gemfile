@@ -4,14 +4,16 @@ source "https://rubygems.org"
 gem "highline"
 
 # Ruby server
-gem "rack"
+gem "rack", ">= 2.0.6"
 gem "rack-contrib"
 gem "rack-rewrite"
 gem "thin"
 
 # For the web site
-gem "jekyll", "~> 3.6"
+gem "jekyll", ">= 3.6.3"
 gem "json"
+
+gem "ffi", ">= 1.9.24"
 
 group :jekyll_plugins do
    # gem "jekyll-feed", "~> 0.6"
