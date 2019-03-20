@@ -14,9 +14,13 @@ if (length(args) != 2) {
     stop("Incorrect arguments provided")
 }
 
+name_of <- function(file) {
+    sub(".rds", "", basename(file), fixed = TRUE)
+}
+
 path <- args[1]
 outdir <- args[2]
-mldname <- sub(".rds", "", basename(path), fixed = T)
+mldname <- name_of(path)
 dataset <- readRDS(path)
 
 if (class(dataset) == "mldr") {

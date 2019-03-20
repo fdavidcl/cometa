@@ -15,27 +15,38 @@ if (length(BASEURL) == 0) {
     BASEURL <- ""
 }
 
-add_dataset <- function(df, file) {
-  name <- sub(".rds", "", basename(file))
-  cat("Reading", name, "...\n")
+name_of <- function(file) {
+    sub(".rds", "", basename(file), fixed = TRUE)
+}
+
+add_dataset <- function(file) {
+  name <- name_of(file)
   
   mld <- readRDS(file)
-  df[dim(df)[1] + 1, ] <- list(
+  list(
     name,
     mld$measures$num.instances,
     mld$measures$num.attributes,
     mld$measures$num.labels,
     paste0(BASEURL, "/", name, ".rds")
   )
-  df[order(df$Name),]
 }
 
+files <- dir(args[1], pattern = "\\.rds$", full.names = T)
 
-files <- dir(args[1], pattern = "*.rds", full.names = T)
+datasets <- data.frame(Name = character(0), Instances = numeric(0), Attributes = numeric(0), Labels = numeric(0), URL = character(0), stringsAsFactors = FALSE)
 
-datasets <- data.frame(Name = character(0), Instances = numeric(0), Attributes = numeric(0), Labels = numeric(0), URL = character(0), stringsAsFactors = F)
+if (file.exists(args[2])) {
+    datasets <- rbind(datasets, read.csv(args[2], stringsAsFactors = FALSE))
+}
 
-for (f in files)
-  datasets <- add_dataset(datasets, f)
+for (f in files) {
+    if (!(name_of(f) %in% datasets$Name)) {
+        cat("Adding", name_of(f), "to CSV file\n")
+        datasets <- rbind(datasets, add_dataset(f))
+    }
+}
+
+datasets <- datasets[order(datasets$Name), ]
 
 write.csv(datasets, file = args[2], row.names = F)

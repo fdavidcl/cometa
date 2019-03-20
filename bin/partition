@@ -3,6 +3,10 @@
 require(mldr)
 require(mldr.datasets)
 
+name_of <- function(file) {
+    sub(".rds", "", basename(file), fixed = TRUE)
+}
+
 STRATEGIES <-
     list(rand = mldr.datasets::random.kfolds,
          stra = mldr.datasets::stratified.kfolds,
@@ -87,7 +91,7 @@ main <- function() {
     dataset <- readRDS(path)
 
     if (class(dataset) == "mldr") {
-        partition(dataset, sub(".rds", "", basename(path), fixed = T), outdir)
+        partition(dataset, name_of(path), outdir)
     } else {
         cat("Please specify a valid mld file\n")
     }

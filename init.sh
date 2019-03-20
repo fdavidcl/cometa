@@ -10,10 +10,10 @@ function process_dataset {
     bin/metadata "$dataset" public/ || exit 1
     cp public/json/"$basename".json site/_data/datasets 
     bin/format $dataset public/full/ || exit 1
-    mkdir -p public/partitions/"$name"
     
     # Pretty slow:
     if [ "$1" == "unpartitioned" ]; then
+        mkdir -p public/partitions/"$name"
         bin/partition "$dataset" public/partitions/"$name" || exit 1
         bin/compress public/partitions/"$name" public/partitions || exit 1
     fi

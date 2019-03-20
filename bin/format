@@ -2,6 +2,10 @@
 
 FORMATS <- c("mulan", "meka", "libsvm", "keel")
 
+name_of <- function(file) {
+    sub(".rds", "", basename(file), fixed = TRUE)
+}
+
 main <- function(args = commandArgs(trailingOnly = T)) {
     if (length(args) != 2) {
         message(
@@ -15,7 +19,7 @@ main <- function(args = commandArgs(trailingOnly = T)) {
     outdir <- args[2]
     
     mld <- readRDS(path)
-    mldr.datasets::write.mldr(mld, format = FORMATS, basename = file.path(outdir, sub(".rds", "", basename(path))), sparse = mldr.datasets::sparsity(mld) > 0.5)
+    mldr.datasets::write.mldr(mld, format = FORMATS, basename = file.path(outdir, name_of(path)), sparse = mldr.datasets::sparsity(mld) > 0.5)
     saveRDS(mld, file = file.path(outdir, basename(path)))
 }
 
