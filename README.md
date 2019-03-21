@@ -20,7 +20,7 @@ To run your own image:
 
 ```
 mkdir public
-docker run -dp 8080:80 \
+docker run -dp 8080:8080 \
   --mount type=bind,source="$(pwd)/public",target=/usr/app/public \
   --name cometa1 \
   mycometa
@@ -30,7 +30,7 @@ docker run -dp 8080:80 \
 
 ```
 mkdir public
-docker run -dp 8080:80 \
+docker run -dp 8080:8080 \
   --mount type=bind,source="$(pwd)/public",target=/usr/app/public \
   --name cometa1 \
   fdavidcl/cometa:latest
@@ -47,7 +47,7 @@ docker start cometa1
 
 ```
 mkdir public
-docker run --rm -itp 8080:80 \
+docker run --rm -itp 8080:8080 \
   --mount type=bind,source="public",target=/usr/app/public \
   --name cometa1 \
   fdavidcl/cometa:latest
@@ -67,7 +67,7 @@ Run with environment variables:
 Example:
 
 ```
-docker run -dp 8080:80 \
+docker run -dp 8080:8080 \
   --mount type=bind,source="$(pwd)/public",target=/usr/app/public \
   --name cometa1 \
   -e SUBMISSION_REPO="example/cometa" \
