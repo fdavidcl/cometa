@@ -64,7 +64,7 @@ partition <- function(mld, name, dir) {
 
                 fold_object <- mldr::mldr_from_dataframe(mld$dataset[fold_list[[g]],], labelIndices = mld$labels$index, attributes = mld$attributes, name = mld$name)
 
-                mldr.datasets::write.mldr(fold_object, format = FORMATS, basename = basename, sparse = sparse)
+                mldr.datasets::write.mldr(fold_object, format = FORMATS, basename = basename, sparse = sparse, noconfirm = TRUE)
 
                                         # RDS format
                 saveRDS(fold_object, file = paste0(basename, ".rds"))
