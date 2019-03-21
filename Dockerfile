@@ -10,24 +10,30 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends $BUILD_PACKAGES $RUBY_PACKAGES && \
     rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /usr/app
+RUN mkdir /usr/app \
+    && chown docker:docker /usr/app
 WORKDIR /usr/app
 
+RUN gem pristine rake \
+    && gem update --system --no-document \
+    && gem install "bundler:>=2"
+
+USER docker
+
 # Install Ruby dependencies
-COPY Gemfile /usr/app/
-COPY Gemfile.lock /usr/app/
-RUN gem update --system
-RUN gem install "bundler:>=2"
+COPY --chown=docker:docker Gemfile /usr/app/
+COPY --chown=docker:docker Gemfile.lock /usr/app/
 RUN bundle install --frozen --path vendor/bundle
 
 # Install R dependencies
 RUN mkdir /usr/app/bin
-COPY bin/r_install /usr/app/bin
+COPY --chown=docker:docker bin/r_install /usr/app/bin
 RUN /usr/app/bin/r_install mldr jsonlite && \
     rm -rf /tmp/*/downloaded_packages
 
-EXPOSE 80
+EXPOSE 8080
 
 # Copy and run app
 ENTRYPOINT ["/usr/app/init.sh"]
-COPY . /usr/app
+COPY --chown=docker:docker . /usr/app
+

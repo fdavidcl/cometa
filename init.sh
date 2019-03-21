@@ -12,7 +12,7 @@ function process_dataset {
     bin/format $dataset public/full/ || exit 1
     
     # Pretty slow:
-    if [ "$1" == "unpartitioned" ]; then
+    if [ "$2" == "unpartitioned" ]; then
         mkdir -p public/partitions/"$name"
         bin/partition "$dataset" public/partitions/"$name" || exit 1
         bin/compress public/partitions/"$name" public/partitions || exit 1
@@ -138,6 +138,13 @@ if [[ -d public ]]; then
         welcome
         manage_options
     else
+        echo -e "
+If you see this message, you are running in non-interactive mode. You will not
+be able to stop the container by using CTRL+C. Instead, open an additional terminal
+and run
+
+    \e[1mdocker stop $(cat /etc/hostname)\e[m
+"
         main
     fi
 else
