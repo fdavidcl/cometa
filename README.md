@@ -21,7 +21,7 @@ To run your own image:
 ```
 mkdir public
 docker run -dp 8080:8080 \
-  --volume public:/usr/app/public \
+  --volume "$(pwd)/public:/usr/app/public" \
   --name cometa1 \
   mycometa
 ```
@@ -31,7 +31,7 @@ docker run -dp 8080:8080 \
 ```
 mkdir public
 docker run -dp 8080:8080 \
-  --volume public:/usr/app/public \
+  --volume "$(pwd)/public:/usr/app/public" \
   --name cometa1 \
   fdavidcl/cometa:latest
 ```
@@ -48,7 +48,7 @@ docker start cometa1
 ```
 mkdir public
 docker run --rm -itp 8080:8080 \
-  --volume public:/usr/app/public \
+  --volume "$(pwd)/public:/usr/app/public" \
   --name cometa1 \
   fdavidcl/cometa:latest
 ```
@@ -68,7 +68,7 @@ Example:
 
 ```
 docker run -dp 8080:8080 \
-  --volume public:/usr/app/public \
+  --volume "$(pwd)/public:/usr/app/public" \
   --name cometa1 \
   -e SUBMISSION_REPO="example/cometa" \
   -e SUBMISSION_TOKEN=123456abcdef7890ghij \

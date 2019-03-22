@@ -42,7 +42,7 @@ saveRDS(mydataset, file = "public/full/mydataset.rds"){% endhighlight %}
 {% highlight bash %}
 mkdir public
 docker run -dp 8080:8080 \
-  --volume public:/usr/app/public \
+  --volume "$(pwd)/public:/usr/app/public" \
   --name cometa1 \
   fdavidcl/cometa:latest{% endhighlight %}
 
@@ -65,7 +65,7 @@ docker run -dp 8080:8080 \
 {% highlight bash %}
 mkdir public
 docker run --rm -itp 8080:8080 \
-  --volume public:/usr/app/public \
+  --volume "$(pwd)/public:/usr/app/public" \
   --name cometa1 \
   fdavidcl/cometa:latest{% endhighlight %}
 
